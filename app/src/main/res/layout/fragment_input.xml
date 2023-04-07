@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controllers.input.InputFragment">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_input_pane"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/button_foods"
+        app:layout_constraintEnd_toStartOf="@id/vtv_syrups"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_foods"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="foods"
+        android:textColor="@color/lime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_drinks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fcv_input_pane" />
+
+    <Button
+        android:id="@+id/button_drinks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="drinks"
+        android:textColor="@color/lime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_sides"
+        app:layout_constraintStart_toEndOf="@id/button_foods"
+        app:layout_constraintTop_toBottomOf="@id/fcv_input_pane" />
+
+    <Button
+        android:id="@+id/button_sides"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="sides"
+        android:textColor="@color/lime"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vtv_customizations"
+        app:layout_constraintStart_toEndOf="@id/button_drinks"
+        app:layout_constraintTop_toBottomOf="@id/fcv_input_pane" />
+
+    <com.jackingaming.vesselforcheesepos.VerticalTextView
+        android:id="@+id/vtv_syrups"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/purple"
+        android:gravity="center_vertical"
+        android:text="syrups"
+        android:textColor="@color/purple_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/vtv_milks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fcv_input_pane"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jackingaming.vesselforcheesepos.VerticalTextView
+        android:id="@+id/vtv_milks"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/purple"
+        android:gravity="center_vertical"
+        android:text="milks"
+        android:textColor="@color/purple_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/vtv_customizations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fcv_input_pane"
+        app:layout_constraintTop_toBottomOf="@id/vtv_syrups" />
+
+    <com.jackingaming.vesselforcheesepos.VerticalTextView
+        android:id="@+id/vtv_customizations"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/purple"
+        android:gravity="center_vertical"
+        android:text="customizations"
+        android:textColor="@color/purple_200"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_sides"
+        app:layout_constraintTop_toBottomOf="@id/vtv_milks" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
