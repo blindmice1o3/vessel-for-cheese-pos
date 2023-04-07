@@ -30,6 +30,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ViewportFragment extends Fragment {
+    public static final int INDEX_NO_SELECTION = -1;
+    public static final float ALPHA_SELECTED = 0.5f, ALPHA_NOT_SELECTED = 1.0f;
 
     public interface PostButtonListener {
         void onPostButtonClicked();
@@ -46,8 +48,9 @@ public class ViewportFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private int indexSelected = INDEX_NO_SELECTION;
     private TextView tvIndexDisplayer;
-    private int indexSelected = -1;
+    private View viewSelected;
 
     // TODO: initRecyclerView
     private RecyclerView rvStagingArea;
@@ -111,7 +114,39 @@ public class ViewportFragment extends Fragment {
         return view;
     }
 
-    private View viewCurrentlySelected;
+    private void updateSelection(int position, View view) {
+        if (viewSelected != null) {
+            resetViewSelected();
+        }
+
+        indexSelected = position;
+        viewSelected = view;
+
+        highlightViewSelected();
+    }
+
+    private void removeSelection() {
+        menuItems.remove(indexSelected);
+        adapter.notifyItemRemoved(indexSelected);
+
+        resetViewSelected();
+    }
+
+    private void resetViewSelected() {
+        indexSelected = INDEX_NO_SELECTION;
+        unhighlightViewSelected();
+        viewSelected = null;
+    }
+
+    private void unhighlightViewSelected() {
+        viewSelected.setAlpha(ALPHA_NOT_SELECTED);
+        tvIndexDisplayer.setText(Integer.toString(indexSelected));
+    }
+
+    private void highlightViewSelected() {
+        viewSelected.setAlpha(ALPHA_SELECTED);
+        tvIndexDisplayer.setText(Integer.toString(indexSelected));
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -126,31 +161,13 @@ public class ViewportFragment extends Fragment {
                 new MenuItemAdapter.MenuItemAdapterListener() {
                     @Override
                     public void onMenuItemClicked(int position, View view) {
-                        // updateSelection()
-                        if (viewCurrentlySelected != null) {
-                            viewCurrentlySelected.setAlpha(1.0f);
-                        }
-
-                        indexSelected = position;
-                        tvIndexDisplayer.setText(Integer.toString(indexSelected));
-
-                        view.setAlpha((0.5f));
-                        viewCurrentlySelected = view;
+                        updateSelection(position, view);
                     }
 
                     @Override
-                    public void onMenuItemLongClicked(int position) {
-                        // removeSelection()
-                        menuItems.remove(position);
-                        adapter.notifyItemRemoved(position);
-
-                        if (viewCurrentlySelected != null) {
-                            viewCurrentlySelected.setAlpha(1.0f);
-                        }
-
-                        viewCurrentlySelected = null;
-                        indexSelected = -1;
-                        tvIndexDisplayer.setText(Integer.toString(indexSelected));
+                    public void onMenuItemLongClicked(int position, View view) {
+                        updateSelection(position, view);
+                        removeSelection();
                     }
                 });
         rvStagingArea.setAdapter(adapter);

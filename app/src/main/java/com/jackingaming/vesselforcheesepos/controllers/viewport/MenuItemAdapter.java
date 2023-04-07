@@ -32,7 +32,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public interface MenuItemAdapterListener {
         void onMenuItemClicked(int position, View view);
 
-        void onMenuItemLongClicked(int position);
+        void onMenuItemLongClicked(int position, View view);
     }
 
     private MenuItemAdapterListener listener;
@@ -204,7 +204,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Log.i(TAG, "item in RV long-clicked! position: " + position);
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
                 if (listener != null) {
-                    listener.onMenuItemLongClicked(position);
+                    listener.onMenuItemLongClicked(position, view);
                     return true;
                 }
             }
@@ -257,7 +257,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Log.i(TAG, "item in RV long-clicked! position: " + position);
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
                 if (listener != null) {
-                    listener.onMenuItemLongClicked(position);
+                    listener.onMenuItemLongClicked(position, view);
                     return true;
                 }
             }
@@ -299,7 +299,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Log.i(TAG, "item in RV long-clicked! position: " + position);
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
                 if (listener != null) {
-                    listener.onMenuItemLongClicked(position);
+                    listener.onMenuItemLongClicked(position, view);
                     return true;
                 }
             }
