@@ -51,7 +51,7 @@
         app:layout_constraintStart_toEndOf="@id/button_drinks"
         app:layout_constraintTop_toBottomOf="@id/fcv_input_pane" />
 
-    <com.jackingaming.vesselforcheesepos.VerticalTextView
+    <com.jackingaming.vesselforcheesepos.controllers.VerticalTextView
         android:id="@+id/vtv_syrups"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -65,7 +65,7 @@
         app:layout_constraintStart_toEndOf="@id/fcv_input_pane"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.jackingaming.vesselforcheesepos.VerticalTextView
+    <com.jackingaming.vesselforcheesepos.controllers.VerticalTextView
         android:id="@+id/vtv_milks"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toEndOf="@id/fcv_input_pane"
         app:layout_constraintTop_toBottomOf="@id/vtv_syrups" />
 
-    <com.jackingaming.vesselforcheesepos.VerticalTextView
+    <com.jackingaming.vesselforcheesepos.controllers.VerticalTextView
         android:id="@+id/vtv_customizations"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

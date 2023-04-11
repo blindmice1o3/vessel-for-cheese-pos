@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 
 public class Syrup extends DrinkComponent {
-    public static final String TAG = "syrup";
+    public static final String TAG = "Syrup";
 
     public enum Type {
         CARAMEL,

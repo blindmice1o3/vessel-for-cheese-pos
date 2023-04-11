@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.components.drinks.milks;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 
 public class Milk extends DrinkComponent {
-    public static final String TAG = "milk";
+    public static final String TAG = "Milk";
 
     public enum Type {
         TWO_PERCENT,

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.VerticalTextView;
+import com.jackingaming.vesselforcheesepos.controllers.VerticalTextView;
 
 /**
  * A simple {@link Fragment} subclass.

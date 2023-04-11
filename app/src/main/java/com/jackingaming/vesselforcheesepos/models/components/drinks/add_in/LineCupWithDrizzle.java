@@ -4,7 +4,7 @@ import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkCompone
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
 
 public class LineCupWithDrizzle extends DrinkComponent {
-    public static final String TAG = "line cup with drizzle";
+    public static final String TAG = "LineCupWithDrizzle";
 
     private Sauce.Type sauceType;
 

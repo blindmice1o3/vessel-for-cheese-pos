@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Drink extends MenuItem {
-    public static final String TAG = "drink";
+    public static final String TAG = "Drink";
+
     public static final Size SIZE_DEFAULT = Size.MEDIUM;
 
     public enum Size {SMALL, MEDIUM, LARGE;}

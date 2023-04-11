@@ -6,9 +6,15 @@ import com.jackingaming.vesselforcheesepos.models.components.drinks.UndefinedDri
 import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.syrups.Syrup;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_based.lattes.Latte;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.straight_shots.ShotEspresso;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
 import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
 import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
     public enum Customization {LINE_CUP_WITH_CARAMEL, LINE_CUP_WITH_MOCHA;}
@@ -50,6 +56,50 @@ public class Menu {
     public enum CategorySides {LOAF, CAKE, DOUGHTNUT, SWEET_ROLL, IMPULSE_ITEM, BROWNIE, COOKIE, BAGEL, CROISSANT, MUFFIN, SCONE, OTHER;}
 
     public enum CategorySidesOther {STEAMED_VEGETABLE;}
+
+    public static List<String> getListOfAllMilks() {
+        List<String> allMilks = new ArrayList<String>();
+        for (Milk.Type typeMilk : Milk.Type.values()) {
+            allMilks.add(typeMilk.name());
+        }
+
+        return allMilks;
+    }
+
+    public static List<String> getListOfAllSyrupsAndSauces() {
+        List<String> allSyrupsAndSauces = new ArrayList<String>();
+        for (Syrup.Type typeSyrup : Syrup.Type.values()) {
+            allSyrupsAndSauces.add(typeSyrup.name());
+        }
+        for (Sauce.Type typeSauce : Sauce.Type.values()) {
+            allSyrupsAndSauces.add(typeSauce.name());
+        }
+
+        return allSyrupsAndSauces;
+    }
+
+    public static List<String> getListOfAllDrinks() {
+        List<String> allDrinks = new ArrayList<String>();
+        allDrinks.add(Water.TAG);
+        allDrinks.add(ShotEspresso.TAG);
+        allDrinks.add(Latte.TAG);
+
+        return allDrinks;
+    }
+
+    public static List<String> getListOfAllFoods() {
+        List<String> allFoods = new ArrayList<String>();
+        allFoods.add(Bread.TAG);
+
+        return allFoods;
+    }
+
+    public static List<String> getListOfAllSides() {
+        List<String> allSides = new ArrayList<String>();
+        allSides.add(SteamedVegetable.TAG);
+
+        return allSides;
+    }
 
     public static DrinkComponent instantiateDrinkComponentByButtonTag(String tagOfSelectedButton) {
         String[] tagSplitted = tagOfSelectedButton.split("\\s+");
