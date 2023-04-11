@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
@@ -120,27 +121,19 @@ public class ViewportFragment extends Fragment {
     }
 
     private void updateSelection(int position, View view) {
-        if (viewSelected != null) {
-            resetViewSelected();
-        }
-
         indexSelected = position;
         viewSelected = view;
-
-        highlightViewSelected();
-    }
-
-    private void removeSelection() {
-        menuItems.remove(indexSelected);
-        adapter.notifyItemRemoved(indexSelected);
-
-        resetViewSelected();
     }
 
     private void resetViewSelected() {
+        if (viewSelected != null) {
+            unhighlightViewSelected();
+            viewSelected = null;
+        } else {
+            Toast.makeText(getContext(), "viewSelected is null", Toast.LENGTH_SHORT).show();
+        }
+
         indexSelected = INDEX_NO_SELECTION;
-        unhighlightViewSelected();
-        viewSelected = null;
     }
 
     private void unhighlightViewSelected() {
@@ -166,13 +159,18 @@ public class ViewportFragment extends Fragment {
                 new MenuItemAdapter.MenuItemAdapterListener() {
                     @Override
                     public void onMenuItemClicked(int position, View view) {
+                        resetViewSelected();
+
                         updateSelection(position, view);
+
+                        highlightViewSelected();
                     }
 
                     @Override
                     public void onMenuItemLongClicked(int position, View view) {
-                        updateSelection(position, view);
-                        removeSelection();
+                        adapter.removeMenuItem(position);
+
+                        resetViewSelected();
                     }
                 });
         rvStagingArea.setAdapter(adapter);
@@ -201,7 +199,8 @@ public class ViewportFragment extends Fragment {
         MenuItem menuItemSelected = menuItems.get(indexSelected);
         if (menuItemSelected instanceof Drink) {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is a Drink.");
-            adapter.addDrinkComponentToSelectedDrink(indexSelected, drinkComponent);
+            RecyclerView.ViewHolder viewHolderDrinkSelected = rvStagingArea.findViewHolderForAdapterPosition(indexSelected);
+            adapter.addDrinkComponentToSelectedDrink(viewHolderDrinkSelected, drinkComponent);
         } else {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is NOT a Drink.");
         }

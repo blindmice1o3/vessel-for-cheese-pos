@@ -15,6 +15,7 @@ import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineC
 import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.syrups.Syrup;
+import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 
 import java.util.List;
 
@@ -56,6 +57,17 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
     @Override
     public int getItemCount() {
         return customizedDrinkComponents.size();
+    }
+
+    public void addDrinkComponent(DrinkComponent drinkComponent) {
+        int indexNewEnd = customizedDrinkComponents.size();
+        customizedDrinkComponents.add(drinkComponent);
+        notifyItemInserted(indexNewEnd);
+    }
+
+    public void removeDrinkComponent(int indexSelected) {
+        customizedDrinkComponents.remove(indexSelected);
+        notifyItemRemoved(indexSelected);
     }
 
     public class ViewHolderCustomizedDrinkComponent extends RecyclerView.ViewHolder
