@@ -9,7 +9,8 @@ import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.controllers.input.InputPaneFragment;
 import com.jackingaming.vesselforcheesepos.controllers.input.InputFragment;
 import com.jackingaming.vesselforcheesepos.controllers.viewport.ViewportFragment;
-import com.jackingaming.vesselforcheesepos.models.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 
 public class MainActivity extends AppCompatActivity
         implements InputPaneFragment.ClickListener, ViewportFragment.PostButtonListener {
@@ -37,7 +38,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onInputPaneButtonClicked(MenuItem menuItem) {
-        viewportFragment.addItem(menuItem);
+        viewportFragment.addMenuItem(menuItem);
+    }
+
+    @Override
+    public void onInputPaneButtonClicked(DrinkComponent drinkComponent) {
+        viewportFragment.addDrinkComponent(drinkComponent);
     }
 
     @Override

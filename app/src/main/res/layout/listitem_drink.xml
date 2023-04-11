@@ -9,7 +9,8 @@
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rv_drink_customization"
+        android:background="@color/green"
+        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
         app:layout_constraintEnd_toStartOf="@id/tv_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,13 +19,13 @@
         android:id="@+id/tv_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rv_drink_customization"
+        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_drink_customization"
+        android:id="@+id/rv_customized_drink_components"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -9,6 +9,7 @@
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/brown"
         app:layout_constraintBottom_toTopOf="@id/rv_food_customization"
         app:layout_constraintEnd_toStartOf="@id/tv_price"
         app:layout_constraintStart_toStartOf="parent"

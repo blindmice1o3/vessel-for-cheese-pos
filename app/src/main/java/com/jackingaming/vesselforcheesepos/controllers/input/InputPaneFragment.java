@@ -18,15 +18,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.models.DarkCaramelSauce;
-import com.jackingaming.vesselforcheesepos.models.Menu;
-import com.jackingaming.vesselforcheesepos.models.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.TwoPercentMilk;
-import com.jackingaming.vesselforcheesepos.models.Undefined;
-import com.jackingaming.vesselforcheesepos.models.drinks.other.Water;
-import com.jackingaming.vesselforcheesepos.models.drinks.customizations.add_in.LineCupWithCaramel;
-import com.jackingaming.vesselforcheesepos.models.foods.Bread;
-import com.jackingaming.vesselforcheesepos.models.sides.SteamedVegetable;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
+import com.jackingaming.vesselforcheesepos.models.menu.Menu;
+import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu.UndefinedMenuItem;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
+import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
+import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +50,8 @@ public class InputPaneFragment extends Fragment {
 
     public interface ClickListener {
         void onInputPaneButtonClicked(MenuItem menuItem);
+
+        void onInputPaneButtonClicked(DrinkComponent drinkComponent);
     }
 
     private ClickListener clickListener;
@@ -119,8 +122,7 @@ public class InputPaneFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState == null) {
             Log.i(TAG, "onViewCreated() savedInstanceState == null");
-            buttons = new Button[numberOfRows][numberOfColumns];
-            initButtons(type);
+            initButtons();
         }
         Log.i(TAG, "onViewCreated() savedInstanceState != null");
     }
@@ -131,7 +133,9 @@ public class InputPaneFragment extends Fragment {
         clickListener = null;
     }
 
-    private void initButtons(Type type) {
+    private void initButtons() {
+        buttons = new Button[numberOfRows][numberOfColumns];
+
         View buttonPrevious = null;
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfColumns; column++) {
@@ -151,7 +155,7 @@ public class InputPaneFragment extends Fragment {
                             buttonNew.setText(Bread.NAME_DEFAULT);
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     case DRINKS:
@@ -159,7 +163,7 @@ public class InputPaneFragment extends Fragment {
                             buttonNew.setText(Water.NAME_DEFAULT);
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     case SIDES:
@@ -167,35 +171,35 @@ public class InputPaneFragment extends Fragment {
                             buttonNew.setText(SteamedVegetable.NAME_DEFAULT);
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     case SYRUPS:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(DarkCaramelSauce.NAME_DEFAULT);
+                            buttonNew.setText(Sauce.Type.DARK_CARAMEL.name());
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     case MILKS:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(TwoPercentMilk.NAME_DEFAULT);
+                            buttonNew.setText(Milk.Type.TWO_PERCENT.name());
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     case CUSTOMIZATIONS:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(LineCupWithCaramel.NAME_DEFAULT);
+                            buttonNew.setText(LineCupWithDrizzle.TAG + ": " + Sauce.Type.CARAMEL_DRIZZLE.name());
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
-                            buttonNew.setText(Undefined.NAME_DEFAULT);
+                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
                     default:
-                        buttonNew.setText(Undefined.NAME_DEFAULT);
+                        buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         break;
                 }
 
@@ -204,9 +208,23 @@ public class InputPaneFragment extends Fragment {
                     public void onClick(View view) {
                         String tagOfSelectedButton = (String) view.getTag();
 
-                        //TODO: replace enum Menu.Item with class MenuItem
-                        MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
-                        clickListener.onInputPaneButtonClicked(menuItemSelected);
+                        switch (type) {
+                            case FOODS:
+                            case DRINKS:
+                            case SIDES:
+                                MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
+                                clickListener.onInputPaneButtonClicked(menuItemSelected);
+                                break;
+                            case SYRUPS:
+                            case MILKS:
+                            case CUSTOMIZATIONS:
+                                DrinkComponent customizedDrinkComponent = Menu.instantiateDrinkComponentByButtonTag(tagOfSelectedButton);
+                                clickListener.onInputPaneButtonClicked(customizedDrinkComponent);
+                                break;
+                            default:
+                                Log.e(TAG, "initButtons() buttonNew.OnClickListener.onClick(View) switch(type)'s default case");
+                                break;
+                        }
                     }
                 });
 

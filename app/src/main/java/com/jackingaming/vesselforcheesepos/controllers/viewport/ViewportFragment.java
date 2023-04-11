@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.models.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.TwoPercentMilk;
-import com.jackingaming.vesselforcheesepos.models.sides.SteamedVegetable;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
+import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
+import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ViewportFragment extends Fragment {
+    public static final String TAG = "ViewportFragment";
     public static final int INDEX_NO_SELECTION = -1;
     public static final float ALPHA_SELECTED = 0.5f, ALPHA_NOT_SELECTED = 1.0f;
 
@@ -154,8 +159,8 @@ public class ViewportFragment extends Fragment {
 
         tvIndexDisplayer.setText(Integer.toString(indexSelected));
 
-        menuItems.add(new SteamedVegetable());
-        menuItems.add(new TwoPercentMilk());
+        menuItems.add(new Bread());
+        menuItems.add(new Water());
 
         adapter = new MenuItemAdapter(menuItems,
                 new MenuItemAdapter.MenuItemAdapterListener() {
@@ -183,17 +188,22 @@ public class ViewportFragment extends Fragment {
         postButtonListener = null;
     }
 
-    public void addItem(MenuItem menuItem) {
-        // BEFORE change to data [record state]
-//        int indexEnd = adapter.getItemCount();
+    public void addMenuItem(MenuItem menuItem) {
+        adapter.addMenuItem(menuItem);
+    }
 
-        // TODO: May change to BIDIRECTIONAL relationship using MenuItem and OrderInfo
-        //  classes. For this, MenuItem should have an OrderInfo field. After calling
-        //  "orderInfo.addMenuItem(menuItem)", there should be "menuItem.setOrderInfo(orderInfo)".
-        adapter.addItem(menuItem);
-//        menuItems.add(menuItem);
+    public void addDrinkComponent(DrinkComponent drinkComponent) {
+        if (indexSelected == -1) {
+            Log.i(TAG, "addDrinkComponent(DrinkComponent) indexSelected is -1. returning.");
+            return;
+        }
 
-        // AFTER change to data [update view]
-//        adapter.notifyItemInserted(indexEnd);
+        MenuItem menuItemSelected = menuItems.get(indexSelected);
+        if (menuItemSelected instanceof Drink) {
+            Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is a Drink.");
+            adapter.addDrinkComponentToSelectedDrink(indexSelected, drinkComponent);
+        } else {
+            Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is NOT a Drink.");
+        }
     }
 }

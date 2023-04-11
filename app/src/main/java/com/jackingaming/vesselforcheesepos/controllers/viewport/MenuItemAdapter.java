@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.models.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.drinks.Drink;
-import com.jackingaming.vesselforcheesepos.models.drinks.customizations.DrinkCustomization;
-import com.jackingaming.vesselforcheesepos.models.drinks.customizations.add_in.LineCupWithCaramel;
-import com.jackingaming.vesselforcheesepos.models.foods.Food;
-import com.jackingaming.vesselforcheesepos.models.sides.Side;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
+import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
+import com.jackingaming.vesselforcheesepos.models.menu.foods.Food;
+import com.jackingaming.vesselforcheesepos.models.menu.sides.Side;
 
 import java.util.List;
 
@@ -134,23 +135,29 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return menuItems.size();
     }
 
-    public void addItem(MenuItem menuItem) {
+    public void addMenuItem(MenuItem menuItem) {
         int indexEnd = menuItems.size();
         menuItems.add(menuItem);
         notifyItemInserted(indexEnd);
+    }
+
+    public void addDrinkComponentToSelectedDrink(int indexOfMenuItems, DrinkComponent drinkComponentToBeAdded) {
+        Drink drinkSelected = (Drink) menuItems.get(indexOfMenuItems);
+        drinkSelected.addDrinkComponent(drinkComponentToBeAdded);
+        notifyItemChanged(indexOfMenuItems);
     }
 
     public class ViewHolderDrink extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
         private TextView tvName;
         private TextView tvPrice;
-        private RecyclerView rvDrinkCustomization;
+        private RecyclerView rvCustomizedDrinkComponents;
 
         public ViewHolderDrink(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvPrice = itemView.findViewById(R.id.tv_price);
-            rvDrinkCustomization = itemView.findViewById(R.id.rv_drink_customization);
+            rvCustomizedDrinkComponents = itemView.findViewById(R.id.rv_customized_drink_components);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
@@ -158,33 +165,32 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void bind(Drink drinkSelected) {
             tvName.setText(drinkSelected.getName());
             tvPrice.setText(Double.toString(drinkSelected.getPrice()));
-            initRvDrinkCustomization(drinkSelected);
+            initRvCustomizedDrinkComponents(drinkSelected);
         }
 
-        private void initRvDrinkCustomization(Drink drinkSelected) {
-            List<DrinkCustomization> drinkCustomizations = drinkSelected.getCustomizations();
-            // TODO: remove this test
-            drinkCustomizations.add(new LineCupWithCaramel());
-            DrinkCustomizationAdapter adapter = new DrinkCustomizationAdapter(
-                    drinkCustomizations,
-                    new DrinkCustomizationAdapter.DrinkCustomizationAdapterListener() {
+        private void initRvCustomizedDrinkComponents(Drink drinkSelected) {
+            List<DrinkComponent> customizedDrinkComponents = drinkSelected.getCustomizedDrinkComponents();
+            CustomizedDrinkComponentAdapter adapter = new CustomizedDrinkComponentAdapter(
+                    customizedDrinkComponents,
+                    new CustomizedDrinkComponentAdapter.CustomizedDrinkComponentAdapterListener() {
                         @Override
-                        public void onDrinkCustomizationClicked(int position, View view) {
-                            Toast.makeText(rvDrinkCustomization.getContext(), "onDrinkCustomizationClicked(int, View) position: " + position, Toast.LENGTH_SHORT).show();
+                        public void onCustomizedDrinkComponentClicked(int position, View view) {
+                            Toast.makeText(rvCustomizedDrinkComponents.getContext(), "onCustomizedDrinkComponentClicked(int, View) position: " + position, Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
-                        public void onDrinkCustomizationLongClicked(int position) {
-                            Toast.makeText(rvDrinkCustomization.getContext(), "onDrinkCustomizationLongClicked(int) position: " + position, Toast.LENGTH_SHORT).show();
-                            drinkCustomizations.remove(position);
-                            rvDrinkCustomization.getAdapter().notifyItemRemoved(position);
+                        public void onCustomizedDrinkComponentLongClicked(int position) {
+                            Toast.makeText(rvCustomizedDrinkComponents.getContext(), "onCustomizedDrinkComponentLongClicked(int) position: " + position, Toast.LENGTH_SHORT).show();
+
+                            customizedDrinkComponents.remove(position);
+                            rvCustomizedDrinkComponents.getAdapter().notifyItemRemoved(position);
                         }
                     });
-            rvDrinkCustomization.setAdapter(adapter);
-            rvDrinkCustomization.setLayoutManager(new LinearLayoutManager(rvDrinkCustomization.getContext()));
+            rvCustomizedDrinkComponents.setAdapter(adapter);
+            rvCustomizedDrinkComponents.setLayoutManager(new LinearLayoutManager(rvCustomizedDrinkComponents.getContext()));
             RecyclerView.ItemDecoration itemDecoration =
-                    new DividerItemDecoration(rvDrinkCustomization.getContext(), DividerItemDecoration.VERTICAL);
-            rvDrinkCustomization.addItemDecoration(itemDecoration);
+                    new DividerItemDecoration(rvCustomizedDrinkComponents.getContext(), DividerItemDecoration.VERTICAL);
+            rvCustomizedDrinkComponents.addItemDecoration(itemDecoration);
         }
 
         @Override
