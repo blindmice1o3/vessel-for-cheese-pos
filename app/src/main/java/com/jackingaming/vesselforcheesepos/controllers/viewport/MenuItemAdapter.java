@@ -151,12 +151,16 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             implements View.OnClickListener, View.OnLongClickListener {
         private TextView tvName;
         private TextView tvPrice;
+        private TextView tvSize;
+        private TextView tvIced;
         private RecyclerView rvCustomizedDrinkComponents;
 
         public ViewHolderDrink(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvPrice = itemView.findViewById(R.id.tv_price);
+            tvSize = itemView.findViewById(R.id.tv_size);
+            tvIced = itemView.findViewById(R.id.tv_iced);
             rvCustomizedDrinkComponents = itemView.findViewById(R.id.rv_customized_drink_components);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -165,6 +169,9 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void bind(Drink drinkSelected) {
             tvName.setText(drinkSelected.getName());
             tvPrice.setText(Double.toString(drinkSelected.getPrice()));
+            tvSize.setText(drinkSelected.getSize().name());
+            String isIced = (drinkSelected.isIced()) ? "iced" : "not iced";
+            tvIced.setText(isIced);
             initRvCustomizedDrinkComponents(drinkSelected);
         }
 

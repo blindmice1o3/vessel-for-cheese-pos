@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/green"
-        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
+        app:layout_constraintBottom_toTopOf="@id/tv_size"
         app:layout_constraintEnd_toStartOf="@id/tv_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,10 +19,28 @@
         android:id="@+id/tv_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
+        app:layout_constraintBottom_toTopOf="@id/tv_iced"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_name"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_size"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
+        app:layout_constraintEnd_toStartOf="@id/tv_iced"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_iced"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/rv_customized_drink_components"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_size"
+        app:layout_constraintTop_toBottomOf="@id/tv_price" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_customized_drink_components"
@@ -31,6 +49,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_size" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
