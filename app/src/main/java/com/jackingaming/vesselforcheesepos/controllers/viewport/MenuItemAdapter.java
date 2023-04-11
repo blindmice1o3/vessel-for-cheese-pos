@@ -147,7 +147,8 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public void addDrinkComponentToSelectedDrink(RecyclerView.ViewHolder viewHolderDrinkSelected, DrinkComponent drinkComponentToBeAdded) {
-        CustomizedDrinkComponentAdapter customizedDrinkComponentAdapter = ((ViewHolderDrink) viewHolderDrinkSelected).getAdapterCustomizedDrinkComponents();
+        RecyclerView rvCustomizedDrinkComponents = ((ViewHolderDrink) viewHolderDrinkSelected).getRvCustomizedDrinkComponents();
+        CustomizedDrinkComponentAdapter customizedDrinkComponentAdapter = (CustomizedDrinkComponentAdapter) rvCustomizedDrinkComponents.getAdapter();
         customizedDrinkComponentAdapter.addDrinkComponent(drinkComponentToBeAdded);
     }
 
@@ -158,7 +159,6 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView tvSize;
         private TextView tvIced;
         private RecyclerView rvCustomizedDrinkComponents;
-        private CustomizedDrinkComponentAdapter adapterCustomizedDrinkComponents;
 
         public ViewHolderDrink(@NonNull View itemView) {
             super(itemView);
@@ -180,13 +180,13 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             initRvCustomizedDrinkComponents(drinkSelected);
         }
 
-        protected CustomizedDrinkComponentAdapter getAdapterCustomizedDrinkComponents() {
-            return adapterCustomizedDrinkComponents;
+        protected RecyclerView getRvCustomizedDrinkComponents() {
+            return rvCustomizedDrinkComponents;
         }
 
         private void initRvCustomizedDrinkComponents(Drink drinkSelected) {
             List<DrinkComponent> customizedDrinkComponents = drinkSelected.getCustomizedDrinkComponents();
-            adapterCustomizedDrinkComponents = new CustomizedDrinkComponentAdapter(
+            CustomizedDrinkComponentAdapter adapter = new CustomizedDrinkComponentAdapter(
                     customizedDrinkComponents,
                     new CustomizedDrinkComponentAdapter.CustomizedDrinkComponentAdapterListener() {
                         @Override
@@ -198,10 +198,10 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         public void onCustomizedDrinkComponentLongClicked(int position) {
                             Toast.makeText(rvCustomizedDrinkComponents.getContext(), "onCustomizedDrinkComponentLongClicked(int) position: " + position, Toast.LENGTH_SHORT).show();
 
-                            adapterCustomizedDrinkComponents.removeDrinkComponent(position);
+                            ((CustomizedDrinkComponentAdapter) rvCustomizedDrinkComponents.getAdapter()).removeDrinkComponent(position);
                         }
                     });
-            rvCustomizedDrinkComponents.setAdapter(adapterCustomizedDrinkComponents);
+            rvCustomizedDrinkComponents.setAdapter(adapter);
             rvCustomizedDrinkComponents.setLayoutManager(new LinearLayoutManager(rvCustomizedDrinkComponents.getContext()));
             RecyclerView.ItemDecoration itemDecoration =
                     new DividerItemDecoration(rvCustomizedDrinkComponents.getContext(), DividerItemDecoration.VERTICAL);
