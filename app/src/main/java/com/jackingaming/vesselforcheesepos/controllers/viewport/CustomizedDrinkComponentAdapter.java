@@ -15,7 +15,6 @@ import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineC
 import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.syrups.Syrup;
-import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 
 import java.util.List;
 
@@ -82,7 +81,7 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
         }
 
         public void bind(DrinkComponent drinkComponent) {
-            String nameDrinkComponent = drinkComponent.getClass().getSimpleName() + " ";
+            String nameDrinkComponent = drinkComponent.getClass().getSimpleName() + ": ";
             if (drinkComponent instanceof LineCupWithDrizzle) {
                 nameDrinkComponent += ((LineCupWithDrizzle) drinkComponent).getSauceType().name();
             } else if (drinkComponent instanceof Milk) {
@@ -92,7 +91,7 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
             } else if (drinkComponent instanceof Syrup) {
                 nameDrinkComponent += ((Syrup) drinkComponent).getType().name();
             } else {
-                nameDrinkComponent += "ViewHolderCustomizedDrinkComponent.bind(DrinkComponent) did not specify";
+                nameDrinkComponent = drinkComponent.getClass().getSimpleName();
             }
             tvCustomizedDrinkComponent.setText(nameDrinkComponent);
         }
