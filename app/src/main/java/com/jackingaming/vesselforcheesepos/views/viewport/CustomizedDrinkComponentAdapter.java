@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
 
 import java.util.List;
 
@@ -78,8 +79,34 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
         }
 
         public void bind(DrinkComponent drinkComponent) {
-            String nameDrinkComponent = drinkComponent.getClass().getSimpleName();
-            tvName.setText(nameDrinkComponent);
+            // TODO: move parsing to a method in Menu that returns a String to display
+            if (drinkComponent instanceof AddInsOptions) {
+                Log.i(TAG, "bind(DrinkComponent) drinkComponent instanceof AddInsOptions");
+                AddInsOptions addInsOptions = (AddInsOptions) drinkComponent;
+                if (addInsOptions.getLineTheCup()[0] != null || addInsOptions.getLineTheCup()[1] != null) {
+                    Log.i(TAG, "bind(DrinkComponent) addInsOptions.getLineTheCup() has something in the first or second element (possibly both)");
+                    AddInsOptions.LineTheCup[] lineTheCup = addInsOptions.getLineTheCup();
+                    if (lineTheCup[0] != null && lineTheCup[1] != null) {
+                        String nameDrinkComponent = "LineTheCup: " + lineTheCup[0].name() +
+                                " AND " + lineTheCup[1].name();
+                        tvName.setText(nameDrinkComponent);
+                    } else if (lineTheCup[0] != null) {
+                        String nameDrinkComponent = "LineTheCup: " + lineTheCup[0].name();
+                        tvName.setText(nameDrinkComponent);
+                    } else if (lineTheCup[1] != null) {
+                        String nameDrinkComponent = "LineTheCup: " + lineTheCup[1].name();
+                        tvName.setText(nameDrinkComponent);
+                    }
+                } else if (addInsOptions.getIce() != null) {
+                    Log.i(TAG, "bind(DrinkComponent) addInsOptions.getIce() != null");
+                    AddInsOptions.Ice ice = addInsOptions.getIce();
+                    String nameDrinkComponent = "Ice: " + ice.name();
+                    tvName.setText(nameDrinkComponent);
+                }
+            } else {
+                String nameDrinkComponent = drinkComponent.getClass().getSimpleName();
+                tvName.setText(nameDrinkComponent);
+            }
         }
 
         @SuppressLint("LongLogTag")

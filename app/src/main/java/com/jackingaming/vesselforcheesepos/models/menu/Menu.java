@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.menu;
 import com.jackingaming.vesselforcheesepos.controllers.input.InputPaneFragment;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.UndefinedDrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.line_the_cup.LineCupWithDrizzle;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options.MilkOptions;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_based.lattes.Latte;
@@ -126,7 +126,20 @@ public class Menu {
             }
         } else if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS_CUSTOMIZATIONS.name())) {
             if (row == 0 && column == 0) {
-                drinkComponentSelected = new LineCupWithDrizzle();
+                AddInsOptions addInsOptions = new AddInsOptions();
+                addInsOptions.addIce(AddInsOptions.Ice.MEDIUM);
+
+                drinkComponentSelected = addInsOptions;
+            } else if (row == 3 && column == 0) {
+                AddInsOptions addInsOptions = new AddInsOptions();
+                addInsOptions.addLineTheCup(AddInsOptions.LineTheCup.MOCHA_SAUCE);
+
+                drinkComponentSelected = addInsOptions;
+            } else if (row == 3 && column == 1) {
+                AddInsOptions addInsOptions = new AddInsOptions();
+                addInsOptions.addLineTheCup(AddInsOptions.LineTheCup.CARAMEL_SAUCE);
+
+                drinkComponentSelected = addInsOptions;
             } else {
                 drinkComponentSelected = new UndefinedDrinkComponent();
             }
