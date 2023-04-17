@@ -1,7 +1,7 @@
 package com.jackingaming.vesselforcheesepos.models.menu.foods;
 
 public class Bread extends Food {
-    public static final String TAG = "Bread";
+    public static final String TAG = Bread.class.getSimpleName();
 
     public static final String NAME_DEFAULT = "Bread";
     public static final String DESCRIPTION_DEFAULT = "made from multiplying yeast";

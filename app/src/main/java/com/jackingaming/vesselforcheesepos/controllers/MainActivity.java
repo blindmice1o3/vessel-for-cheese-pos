@@ -13,8 +13,9 @@ import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 
 public class MainActivity extends AppCompatActivity
-        implements InputPaneFragment.ClickListener, ViewportFragment.PostButtonListener {
-    public static final String TAG = "MainActivity";
+        implements ViewportFragment.PostButtonListener,
+        InputPaneFragment.InputPaneFragmentListener {
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     private ViewportFragment viewportFragment;
     private InputFragment inputFragment;
@@ -37,12 +38,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onInputPaneButtonClicked(MenuItem menuItem) {
+    public void onMenuItemClicked(MenuItem menuItem) {
         viewportFragment.addMenuItem(menuItem);
     }
 
     @Override
-    public void onInputPaneButtonClicked(DrinkComponent drinkComponent) {
+    public void onDrinkComponentClicked(DrinkComponent drinkComponent) {
         viewportFragment.addDrinkComponent(drinkComponent);
     }
 

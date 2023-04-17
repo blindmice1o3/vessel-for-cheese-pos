@@ -3,6 +3,8 @@ package com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
 
 public abstract class Espresso extends Drink {
+    public static final String TAG = Espresso.class.getSimpleName();
+
     public enum Type {SHOT, CAPPUCCINO, FLAT_WHITE, LATTE, MACCHIATO;}
 
     // TODO: numberOfShots field

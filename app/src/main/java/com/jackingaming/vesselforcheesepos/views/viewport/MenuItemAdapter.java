@@ -1,4 +1,4 @@
-package com.jackingaming.vesselforcheesepos.controllers.viewport;
+package com.jackingaming.vesselforcheesepos.views.viewport;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,17 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
 import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
 import com.jackingaming.vesselforcheesepos.models.menu.foods.Food;
 import com.jackingaming.vesselforcheesepos.models.menu.sides.Side;
 
 import java.util.List;
 
 public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final String TAG = "MenuItemAdapter";
+    public static final String TAG = MenuItemAdapter.class.getSimpleName();
+
     public static final int MENU_ITEM = R.layout.listitem_menuitem;
     public static final int DRINK = 1;
     public static final int FOOD = 2;

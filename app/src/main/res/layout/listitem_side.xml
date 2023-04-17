@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="@color/yellow"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/purple"
         app:layout_constraintBottom_toTopOf="@id/rv_side_customization"
         app:layout_constraintEnd_toStartOf="@id/tv_price"
         app:layout_constraintStart_toStartOf="parent"

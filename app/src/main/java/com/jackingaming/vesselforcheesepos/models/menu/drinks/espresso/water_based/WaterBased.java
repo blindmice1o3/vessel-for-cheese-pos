@@ -3,6 +3,8 @@ package com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.water_ba
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.Espresso;
 
 public abstract class WaterBased extends Espresso {
+    public static final String TAG = WaterBased.class.getSimpleName();
+
     public WaterBased() {
     }
 

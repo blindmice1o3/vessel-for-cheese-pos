@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
+        android:id="@+id/vtv_syrups"
+        style="@style/PurpleVerticalTab"
+        android:text="syrups"
+        app:layout_constraintBottom_toTopOf="@id/vtv_milks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
+        android:id="@+id/vtv_milks"
+        style="@style/PurpleVerticalTab"
+        android:text="milks"
+        app:layout_constraintBottom_toTopOf="@id/vtv_customizations"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vtv_syrups" />
+
+    <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
+        android:id="@+id/vtv_customizations"
+        style="@style/PurpleVerticalTab"
+        android:text="customizations"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vtv_milks" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.jackingaming.vesselforcheesepos.controllers;
+package com.jackingaming.vesselforcheesepos.views.input;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -9,6 +9,7 @@ import android.view.Gravity;
 import androidx.appcompat.widget.AppCompatTextView;
 
 public class VerticalTextView extends AppCompatTextView {
+    public static final String TAG = VerticalTextView.class.getSimpleName();
 
     final boolean topDown;
 

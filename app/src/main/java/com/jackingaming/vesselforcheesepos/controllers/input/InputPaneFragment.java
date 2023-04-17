@@ -1,6 +1,7 @@
 package com.jackingaming.vesselforcheesepos.controllers.input;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -19,15 +20,20 @@ import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
 import com.jackingaming.vesselforcheesepos.models.menu.Menu;
 import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 import com.jackingaming.vesselforcheesepos.models.menu.UndefinedMenuItem;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options.MilkOptions;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
 import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
 import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
+import com.jackingaming.vesselforcheesepos.views.input.VerticalTextView;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,40 +41,40 @@ import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
  * create an instance of this fragment.
  */
 public class InputPaneFragment extends Fragment {
-    public static final String TAG = "InputPaneFragment";
+    public static final String TAG = InputPaneFragment.class.getSimpleName();
+
     private static final String ARG_TYPE = "type";
     private static final String ARG_NUMBER_OF_ROWS = "number of rows";
     private static final String ARG_NUMBER_OF_COLUMNS = "number of columns";
+    private static final String ARG_TEXT_FOR_BUTTONS = "text for buttons";
 
-    public enum Type {FOODS, DRINKS, SIDES, SYRUPS, MILKS, CUSTOMIZATIONS;}
+    public enum Type {
+        FOODS, SIDES, DRINKS_HOME,
+        DRINKS_SYRUPS, DRINKS_MILKS, DRINKS_CUSTOMIZATIONS;
+    }
 
     private Type type;
     private int numberOfRows;
     private int numberOfColumns;
+    private String[] textForButtons;
+    private VerticalTextView vtvSyrups, vtvMilks, vtvCustomizations;
     private ConstraintLayout constraintLayout;
     private Button[][] buttons;
 
-    public interface ClickListener {
-        void onInputPaneButtonClicked(MenuItem menuItem);
+    public interface InputPaneFragmentListener {
+        void onMenuItemClicked(MenuItem menuItem);
 
-        void onInputPaneButtonClicked(DrinkComponent drinkComponent);
+        void onDrinkComponentClicked(DrinkComponent drinkComponent);
     }
 
-    private ClickListener clickListener;
+    private InputPaneFragmentListener inputPaneFragmentListener;
 
     public InputPaneFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param numberOfRows    Parameter 1.
-     * @param numberOfColumns Parameter 2.
-     * @return A new instance of fragment InputPaneFragment.
-     */
-    public static InputPaneFragment newInstance(Type type, int numberOfRows, int numberOfColumns) {
+    public static InputPaneFragment newInstance(
+            Type type, int numberOfRows, int numberOfColumns) {
         InputPaneFragment fragment = new InputPaneFragment();
 
         Bundle args = new Bundle();
@@ -80,14 +86,29 @@ public class InputPaneFragment extends Fragment {
         return fragment;
     }
 
+    public static InputPaneFragment newInstance(
+            Type type, int numberOfRows, int numberOfColumns,
+            String[] textForButtons) {
+        InputPaneFragment fragment = new InputPaneFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_TYPE, type);
+        args.putInt(ARG_NUMBER_OF_ROWS, numberOfRows);
+        args.putInt(ARG_NUMBER_OF_COLUMNS, numberOfColumns);
+        args.putSerializable(ARG_TEXT_FOR_BUTTONS, textForButtons);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ClickListener) {
-            clickListener = (ClickListener) context;
+        if (context instanceof InputPaneFragmentListener) {
+            inputPaneFragmentListener = (InputPaneFragmentListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement ClickListener");
+                    + " must implement InputPaneFragmentListener");
         }
     }
 
@@ -101,19 +122,53 @@ public class InputPaneFragment extends Fragment {
                 numberOfRows = getArguments().getInt(ARG_NUMBER_OF_ROWS);
                 numberOfColumns = getArguments().getInt(ARG_NUMBER_OF_COLUMNS);
                 Log.i(TAG, String.format(
-                        "onCreate() getArguments() != null (numberOfRows=%d, numberOfColumns=%d)",
-                        numberOfRows, numberOfColumns));
+                        "onCreate() getArguments() != null (type=%s, numberOfRows=%d, numberOfColumns=%d)",
+                        type.name(), numberOfRows, numberOfColumns));
+
+                // TODO: load by pass-in list
+                if (type == Type.DRINKS_CUSTOMIZATIONS) {
+                    textForButtons = (String[]) getArguments().getSerializable(ARG_TEXT_FOR_BUTTONS);
+                    int index = 0;
+                    for (String word : textForButtons) {
+                        Log.i(TAG, index + ": " + word);
+                        index++;
+                    }
+                }
+            } else {
+                Log.e(TAG, "onCreate() getArguments() == null");
             }
-            Log.e(TAG, "onCreate() getArguments() == null DO NOT HAVE numberOfRows and numberOfColumns");
+        } else {
+            Log.i(TAG, "onCreate() savedInstanceState != null");
         }
-        Log.i(TAG, "onCreate() savedInstanceState != null");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_input_pane, container, false);
+        View view = null;
+
+        switch (type) {
+            case FOODS:
+            case SIDES:
+                view = inflater.inflate(R.layout.fragment_input_pane_full_screen, container, false);
+                break;
+            case DRINKS_HOME:
+            case DRINKS_SYRUPS:
+            case DRINKS_MILKS:
+            case DRINKS_CUSTOMIZATIONS:
+                view = inflater.inflate(R.layout.fragment_input_pane_tabbed_screen, container, false);
+                vtvSyrups = view.findViewById(R.id.vtv_syrups);
+                vtvMilks = view.findViewById(R.id.vtv_milks);
+                vtvCustomizations = view.findViewById(R.id.vtv_customizations);
+                break;
+            default:
+                Log.e(TAG, "onCreateView() switch(Type)'s default");
+                view = inflater.inflate(R.layout.fragment_input_pane_full_screen, container, false);
+                break;
+        }
+
         constraintLayout = view.findViewById(R.id.constraintlayout_input_pane);
+
         return view;
     }
 
@@ -122,20 +177,70 @@ public class InputPaneFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (savedInstanceState == null) {
             Log.i(TAG, "onViewCreated() savedInstanceState == null");
+            switch (type) {
+                case FOODS:
+                case SIDES:
+                    break;
+                case DRINKS_HOME:
+                case DRINKS_SYRUPS:
+                case DRINKS_MILKS:
+                case DRINKS_CUSTOMIZATIONS:
+                    vtvSyrups.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
+                                    Type.DRINKS_SYRUPS, 3, 5);
+                            replaceFragmentInInputPaneWith(newFragmentForInputPane);
+                        }
+                    });
+                    vtvMilks.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
+                                    Type.DRINKS_MILKS, 5, 2);
+                            replaceFragmentInInputPaneWith(newFragmentForInputPane);
+                        }
+                    });
+                    vtvCustomizations.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String textFromFile = readTextFileFromRawResourceId(R.raw.drink_customization_tab);
+                            String[] textProcessed = splitTextByCommaAndTrimmedWhiteSpace(textFromFile);
+
+                            // TODO: testing
+                            for (String word : textProcessed) {
+                                Log.i(TAG, word);
+                            }
+
+                            // TODO: using the overloaded newInstance()!
+                            Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
+                                    Type.DRINKS_CUSTOMIZATIONS, 7, 6,
+                                    textProcessed);
+                            replaceFragmentInInputPaneWith(newFragmentForInputPane);
+                        }
+                    });
+                    break;
+                default:
+                    Log.e(TAG, "onViewCreated() switch(Type)'s default");
+                    break;
+            }
+
             initButtons();
+        } else {
+            Log.i(TAG, "onViewCreated() savedInstanceState != null");
         }
-        Log.i(TAG, "onViewCreated() savedInstanceState != null");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        clickListener = null;
+        inputPaneFragmentListener = null;
     }
 
     private void initButtons() {
         buttons = new Button[numberOfRows][numberOfColumns];
 
+        int indexTextForButtons = 0;
         View buttonPrevious = null;
         for (int row = 0; row < numberOfRows; row++) {
             for (int column = 0; column < numberOfColumns; column++) {
@@ -148,19 +253,10 @@ public class InputPaneFragment extends Fragment {
                 buttonNew.setText("(row:" + row + "|\ncolumn: " + column + ")");
                 buttonNew.setTag(row + " " + column + " " + type.name());
 
-
                 switch (type) {
                     case FOODS:
                         if (row == 0 && column == 0) {
                             buttonNew.setText(Bread.NAME_DEFAULT);
-                            buttonNew.setBackgroundColor(Color.MAGENTA);
-                        } else {
-                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
-                        }
-                        break;
-                    case DRINKS:
-                        if (row == 0 && column == 0) {
-                            buttonNew.setText(Water.NAME_DEFAULT);
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
                             buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
@@ -174,59 +270,78 @@ public class InputPaneFragment extends Fragment {
                             buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
-                    case SYRUPS:
+                    case DRINKS_HOME:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(Sauce.Type.DARK_CARAMEL.name());
+                            buttonNew.setText(Water.NAME_DEFAULT);
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
                             buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
-                    case MILKS:
+                    case DRINKS_SYRUPS:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(Milk.Type.TWO_PERCENT.name());
+                            buttonNew.setText(FlavorOptions.Sauce.DARK_CARAMEL.name());
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
                             buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
                         break;
-                    case CUSTOMIZATIONS:
+                    case DRINKS_MILKS:
                         if (row == 0 && column == 0) {
-                            buttonNew.setText(LineCupWithDrizzle.TAG + ": " + Sauce.Type.CARAMEL_DRIZZLE.name());
+                            buttonNew.setText(MilkOptions.MilkBase.TWO_PERCENT.name());
                             buttonNew.setBackgroundColor(Color.MAGENTA);
                         } else {
                             buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         }
+                        break;
+                    case DRINKS_CUSTOMIZATIONS:
+                        // TODO: load by pass-in list
+                        buttonNew.setText(textForButtons[indexTextForButtons]);
+                        indexTextForButtons++;
+
+//                        if (row == 0 && column == 0) {
+//                            buttonNew.setText(LineCupWithDrizzle.TAG + ": " + Sauce.Type.CARAMEL_DRIZZLE.name());
+//                            buttonNew.setBackgroundColor(Color.MAGENTA);
+//                        } else {
+//                            buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
+//                        }
                         break;
                     default:
+                        Log.e(TAG, "initButtons() switch(Type)'s default (setting button's text)");
                         buttonNew.setText(UndefinedMenuItem.NAME_DEFAULT);
                         break;
                 }
 
-                buttonNew.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        String tagOfSelectedButton = (String) view.getTag();
-
-                        switch (type) {
-                            case FOODS:
-                            case DRINKS:
-                            case SIDES:
+                switch (type) {
+                    case FOODS:
+                    case SIDES:
+                    case DRINKS_HOME:
+                        buttonNew.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String tagOfSelectedButton = (String) view.getTag();
                                 MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
-                                clickListener.onInputPaneButtonClicked(menuItemSelected);
-                                break;
-                            case SYRUPS:
-                            case MILKS:
-                            case CUSTOMIZATIONS:
+                                inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                            }
+                        });
+                        break;
+                    case DRINKS_SYRUPS:
+                    case DRINKS_MILKS:
+                    case DRINKS_CUSTOMIZATIONS:
+                        buttonNew.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String tagOfSelectedButton = (String) view.getTag();
                                 DrinkComponent customizedDrinkComponent = Menu.instantiateDrinkComponentByButtonTag(tagOfSelectedButton);
-                                clickListener.onInputPaneButtonClicked(customizedDrinkComponent);
-                                break;
-                            default:
-                                Log.e(TAG, "initButtons() buttonNew.OnClickListener.onClick(View) switch(type)'s default case");
-                                break;
-                        }
-                    }
-                });
+                                inputPaneFragmentListener.onDrinkComponentClicked(customizedDrinkComponent);
+                            }
+                        });
+                        break;
+                    default:
+                        Log.e(TAG, "initButtons() switch(Type)'s default (setting button's click handler)");
+                        break;
+                }
+
 
                 float width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
                 float height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 0, getResources().getDisplayMetrics());
@@ -293,5 +408,37 @@ public class InputPaneFragment extends Fragment {
                 }
             }
         }
+    }
+
+    private void replaceFragmentInInputPaneWith(Fragment newFragment) {
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fcv_input_pane_full_screen, newFragment)
+                .commitNow();
+    }
+
+    private String readTextFileFromRawResourceId(int resourceId) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            InputStream inputStream = getResources().openRawResource(resourceId);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (Resources.NotFoundException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    private String[] splitTextByCommaAndTrimmedWhiteSpace(String text) {
+        String[] textProcessed = text.split(",");
+        for (int i = 0; i < textProcessed.length; i++) {
+            textProcessed[i] = textProcessed[i].trim();
+        }
+        return textProcessed;
     }
 }

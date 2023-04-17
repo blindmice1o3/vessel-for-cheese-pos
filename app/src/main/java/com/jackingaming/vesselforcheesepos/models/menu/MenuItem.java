@@ -1,6 +1,8 @@
 package com.jackingaming.vesselforcheesepos.models.menu;
 
 public abstract class MenuItem {
+    public static final String TAG = MenuItem.class.getSimpleName();
+
     public static final boolean HANDED_OFF_DEFAULT = false;
 
     protected long id;

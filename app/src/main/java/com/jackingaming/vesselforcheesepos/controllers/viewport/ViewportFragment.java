@@ -24,7 +24,7 @@ import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
 import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
-import com.jackingaming.vesselforcheesepos.models.menu.sides.SteamedVegetable;
+import com.jackingaming.vesselforcheesepos.views.viewport.MenuItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ViewportFragment extends Fragment {
-    public static final String TAG = "ViewportFragment";
+    public static final String TAG = ViewportFragment.class.getSimpleName();
+
     public static final int INDEX_NO_SELECTION = -1;
     public static final float ALPHA_SELECTED = 0.5f, ALPHA_NOT_SELECTED = 1.0f;
 

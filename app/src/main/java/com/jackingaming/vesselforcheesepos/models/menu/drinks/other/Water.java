@@ -1,7 +1,7 @@
 package com.jackingaming.vesselforcheesepos.models.menu.drinks.other;
 
 public class Water extends Other {
-    public static final String TAG = "Water";
+    public static final String TAG = Water.class.getSimpleName();
 
     public static final String NAME_DEFAULT = "Water";
     public static final String DESCRIPTION_DEFAULT = "2 part H, 1 part O";

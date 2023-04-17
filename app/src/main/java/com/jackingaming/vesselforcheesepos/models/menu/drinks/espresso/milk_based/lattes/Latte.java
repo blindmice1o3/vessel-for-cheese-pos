@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_bas
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_based.MilkBased;
 
 public class Latte extends MilkBased {
-    public static final String TAG = "Latte";
+    public static final String TAG = Latte.class.getSimpleName();
 
     public static final String NAME_DEFAULT = "Latte";
     public static final String DESCRIPTION_DEFAULT = "espresso, steamed milk, light milk foam";

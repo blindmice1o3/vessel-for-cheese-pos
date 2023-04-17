@@ -3,10 +3,9 @@ package com.jackingaming.vesselforcheesepos.models.menu;
 import com.jackingaming.vesselforcheesepos.controllers.input.InputPaneFragment;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.UndefinedDrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.syrups.Syrup;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.line_the_cup.LineCupWithDrizzle;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options.MilkOptions;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_based.lattes.Latte;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.straight_shots.ShotEspresso;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
@@ -17,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
+    public static final String TAG = Menu.class.getSimpleName();
+
     public enum Customization {LINE_CUP_WITH_CARAMEL, LINE_CUP_WITH_MOCHA;}
 
     public enum Category {DRINKS, FOODS, SIDES;}
@@ -59,7 +60,7 @@ public class Menu {
 
     public static List<String> getListOfAllMilks() {
         List<String> allMilks = new ArrayList<String>();
-        for (Milk.Type typeMilk : Milk.Type.values()) {
+        for (MilkOptions.MilkBase typeMilk : MilkOptions.MilkBase.values()) {
             allMilks.add(typeMilk.name());
         }
 
@@ -68,11 +69,11 @@ public class Menu {
 
     public static List<String> getListOfAllSyrupsAndSauces() {
         List<String> allSyrupsAndSauces = new ArrayList<String>();
-        for (Syrup.Type typeSyrup : Syrup.Type.values()) {
-            allSyrupsAndSauces.add(typeSyrup.name());
+        for (FlavorOptions.Syrup syrup : FlavorOptions.Syrup.values()) {
+            allSyrupsAndSauces.add(syrup.name());
         }
-        for (Sauce.Type typeSauce : Sauce.Type.values()) {
-            allSyrupsAndSauces.add(typeSauce.name());
+        for (FlavorOptions.Sauce sauce : FlavorOptions.Sauce.values()) {
+            allSyrupsAndSauces.add(sauce.name());
         }
 
         return allSyrupsAndSauces;
@@ -101,6 +102,9 @@ public class Menu {
         return allSides;
     }
 
+    // TODO: instantiateSyrupByButtonTag(String)
+    // TODO: instantiateMilkByButtonTag(String)
+    // TODO: instantiateCustomizationByButtonTag(String)
     public static DrinkComponent instantiateDrinkComponentByButtonTag(String tagOfSelectedButton) {
         String[] tagSplitted = tagOfSelectedButton.split("\\s+");
         int row = Integer.parseInt(tagSplitted[0]);
@@ -108,22 +112,21 @@ public class Menu {
         String tagOfFragment = tagSplitted[2];
 
         DrinkComponent drinkComponentSelected = null;
-        if (tagOfFragment.equals(InputPaneFragment.Type.SYRUPS.name())) {
+        if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS_SYRUPS.name())) {
             if (row == 0 && column == 0) {
-                drinkComponentSelected = new Sauce(Sauce.Type.DARK_CARAMEL, true);
+                drinkComponentSelected = new FlavorOptions();
             } else {
                 drinkComponentSelected = new UndefinedDrinkComponent();
             }
-        } else if (tagOfFragment.equals(InputPaneFragment.Type.MILKS.name())) {
+        } else if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS_MILKS.name())) {
             if (row == 0 && column == 0) {
-                drinkComponentSelected = new Milk(Milk.Type.TWO_PERCENT, true);
+                drinkComponentSelected = new MilkOptions();
             } else {
                 drinkComponentSelected = new UndefinedDrinkComponent();
             }
-        } else if (tagOfFragment.equals(InputPaneFragment.Type.CUSTOMIZATIONS.name())) {
+        } else if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS_CUSTOMIZATIONS.name())) {
             if (row == 0 && column == 0) {
-
-                drinkComponentSelected = new LineCupWithDrizzle(Sauce.Type.CARAMEL_DRIZZLE, true);
+                drinkComponentSelected = new LineCupWithDrizzle();
             } else {
                 drinkComponentSelected = new UndefinedDrinkComponent();
             }
@@ -147,7 +150,7 @@ public class Menu {
             } else {
                 menuItemSelected = new UndefinedMenuItem();
             }
-        } else if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS.name())) {
+        } else if (tagOfFragment.equals(InputPaneFragment.Type.DRINKS_HOME.name())) {
             if (row == 0 && column == 0) {
                 menuItemSelected = new Water();
             } else {

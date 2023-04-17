@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.controllers.VerticalTextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +19,8 @@ import com.jackingaming.vesselforcheesepos.controllers.VerticalTextView;
  * create an instance of this fragment.
  */
 public class InputFragment extends Fragment {
+    public static final String TAG = InputFragment.class.getSimpleName();
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +31,6 @@ public class InputFragment extends Fragment {
     private String mParam2;
 
     private Button buttonFoods, buttonDrinks, buttonSides;
-    private VerticalTextView vtvSyrups, vtvMilks, vtvCustomizations;
 
     public InputFragment() {
         // Required empty public constructor
@@ -71,9 +71,6 @@ public class InputFragment extends Fragment {
         buttonFoods = view.findViewById(R.id.button_foods);
         buttonDrinks = view.findViewById(R.id.button_drinks);
         buttonSides = view.findViewById(R.id.button_sides);
-        vtvSyrups = view.findViewById(R.id.vtv_syrups);
-        vtvMilks = view.findViewById(R.id.vtv_milks);
-        vtvCustomizations = view.findViewById(R.id.vtv_customizations);
 
         return view;
     }
@@ -84,7 +81,10 @@ public class InputFragment extends Fragment {
 
         Fragment initialFragmentForInputPane = InputPaneFragment.newInstance(
                 InputPaneFragment.Type.FOODS, 4, 3);
-        replaceFragmentInInputPaneWith(initialFragmentForInputPane);
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.fcv_input_pane_full_screen, initialFragmentForInputPane)
+                .commitNow();
+
 
         buttonFoods.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +98,7 @@ public class InputFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
-                        InputPaneFragment.Type.DRINKS, 5, 5);
+                        InputPaneFragment.Type.DRINKS_HOME, 5, 5);
                 replaceFragmentInInputPaneWith(newFragmentForInputPane);
             }
         });
@@ -110,37 +110,11 @@ public class InputFragment extends Fragment {
                 replaceFragmentInInputPaneWith(newFragmentForInputPane);
             }
         });
-
-        vtvSyrups.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
-                        InputPaneFragment.Type.SYRUPS, 3, 5);
-                replaceFragmentInInputPaneWith(newFragmentForInputPane);
-            }
-        });
-        vtvMilks.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
-                        InputPaneFragment.Type.MILKS, 5, 2);
-                replaceFragmentInInputPaneWith(newFragmentForInputPane);
-            }
-        });
-        vtvCustomizations.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment newFragmentForInputPane = InputPaneFragment.newInstance(
-                        InputPaneFragment.Type.CUSTOMIZATIONS, 5, 5);
-                replaceFragmentInInputPaneWith(newFragmentForInputPane);
-            }
-        });
     }
 
     private void replaceFragmentInInputPaneWith(Fragment newFragment) {
         getChildFragmentManager().beginTransaction()
-                .replace(R.id.fcv_input_pane, newFragment)
+                .replace(R.id.fcv_input_pane_full_screen, newFragment)
                 .commitNow();
     }
-
 }

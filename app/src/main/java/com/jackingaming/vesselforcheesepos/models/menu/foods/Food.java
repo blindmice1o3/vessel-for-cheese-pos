@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.menu.foods;
 import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 
 public abstract class Food extends MenuItem {
-    public static final String TAG = "Food";
+    public static final String TAG = Food.class.getSimpleName();
 
     public Food() {
         super();

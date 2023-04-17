@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Drink extends MenuItem {
-    public static final String TAG = "Drink";
+    public static final String TAG = Drink.class.getSimpleName();
 
     public static final Size SIZE_DEFAULT = Size.MEDIUM;
 
@@ -17,7 +17,6 @@ public abstract class Drink extends MenuItem {
 
     protected Size size;
     protected boolean iced;
-    protected List<DrinkComponent> baseDrinkComponents = new ArrayList<>();
     protected List<DrinkComponent> customizedDrinkComponents = new ArrayList<>();
 
     public Drink() {
@@ -31,15 +30,8 @@ public abstract class Drink extends MenuItem {
     }
 
     public void addDrinkComponent(DrinkComponent drinkComponent) {
-        Log.i(TAG, "addDrinkComponent(DrinkComponent) isCustomization(): " + drinkComponent.isCustomization());
-
-        if (drinkComponent.isCustomization()) {
-            Log.i(TAG, "adding to customizedDrinkComponents");
-            customizedDrinkComponents.add(drinkComponent);
-        } else {
-            Log.i(TAG, "adding to baseDrinkComponents");
-            baseDrinkComponents.add(drinkComponent);
-        }
+        Log.i(TAG, "addDrinkComponent(DrinkComponent)");
+        customizedDrinkComponents.add(drinkComponent);
     }
 
     public Size getSize() {
@@ -56,14 +48,6 @@ public abstract class Drink extends MenuItem {
 
     public void setIced(boolean iced) {
         this.iced = iced;
-    }
-
-    public List<DrinkComponent> getBaseDrinkComponents() {
-        return baseDrinkComponents;
-    }
-
-    public void setBaseDrinkComponents(List<DrinkComponent> baseDrinkComponents) {
-        this.baseDrinkComponents = baseDrinkComponents;
     }
 
     public List<DrinkComponent> getCustomizedDrinkComponents() {

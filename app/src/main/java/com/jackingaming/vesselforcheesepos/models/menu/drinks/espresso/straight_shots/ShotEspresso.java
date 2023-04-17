@@ -3,7 +3,7 @@ package com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.straight
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.Espresso;
 
 public class ShotEspresso extends Espresso {
-    public static final String TAG = "ShotEspresso";
+    public static final String TAG = ShotEspresso.class.getSimpleName();
 
     public static final String NAME_DEFAULT = "Shot of espresso";
     public static final String DESCRIPTION_DEFAULT = "straight-up shot of espresso";

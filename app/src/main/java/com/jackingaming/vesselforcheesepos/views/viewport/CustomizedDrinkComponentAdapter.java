@@ -1,4 +1,4 @@
-package com.jackingaming.vesselforcheesepos.controllers.viewport;
+package com.jackingaming.vesselforcheesepos.views.viewport;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
@@ -10,16 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_in.LineCupWithDrizzle;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.milks.Milk;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.sauces.Sauce;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweeteners.liquids.syrups.Syrup;
 
 import java.util.List;
 
 public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    public static final String TAG = "CustomizedDrinkComponentAdapter";
+    public static final String TAG = CustomizedDrinkComponentAdapter.class.getSimpleName();
 
     public interface CustomizedDrinkComponentAdapterListener {
         void onCustomizedDrinkComponentClicked(int position, View view);
@@ -41,7 +38,7 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = inflater.inflate(R.layout.listitem_customized_drink_component, parent, false);
         RecyclerView.ViewHolder viewHolder = new ViewHolderCustomizedDrinkComponent(view);
         return viewHolder;
     }
@@ -71,29 +68,18 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
 
     public class ViewHolderCustomizedDrinkComponent extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
-        private TextView tvCustomizedDrinkComponent;
+        private TextView tvName;
 
         public ViewHolderCustomizedDrinkComponent(@NonNull View itemView) {
             super(itemView);
-            tvCustomizedDrinkComponent = itemView.findViewById(android.R.id.text1);
+            tvName = itemView.findViewById(R.id.tv_name);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
 
         public void bind(DrinkComponent drinkComponent) {
-            String nameDrinkComponent = drinkComponent.getClass().getSimpleName() + ": ";
-            if (drinkComponent instanceof LineCupWithDrizzle) {
-                nameDrinkComponent += ((LineCupWithDrizzle) drinkComponent).getSauceType().name();
-            } else if (drinkComponent instanceof Milk) {
-                nameDrinkComponent += ((Milk) drinkComponent).getType().name();
-            } else if (drinkComponent instanceof Sauce) {
-                nameDrinkComponent += ((Sauce) drinkComponent).getType().name();
-            } else if (drinkComponent instanceof Syrup) {
-                nameDrinkComponent += ((Syrup) drinkComponent).getType().name();
-            } else {
-                nameDrinkComponent = drinkComponent.getClass().getSimpleName();
-            }
-            tvCustomizedDrinkComponent.setText(nameDrinkComponent);
+            String nameDrinkComponent = drinkComponent.getClass().getSimpleName();
+            tvName.setText(nameDrinkComponent);
         }
 
         @SuppressLint("LongLogTag")

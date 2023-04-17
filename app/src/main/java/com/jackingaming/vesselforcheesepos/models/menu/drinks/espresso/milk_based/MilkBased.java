@@ -3,6 +3,8 @@ package com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_bas
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.Espresso;
 
 public abstract class MilkBased extends Espresso {
+    public static final String TAG = MilkBased.class.getSimpleName();
+
     // TODO: milk.type field
 
     public MilkBased() {
