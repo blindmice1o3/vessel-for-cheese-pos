@@ -10,4 +10,14 @@ public class JuiceOptions extends DrinkComponent {
         APPLE,
         PEACH_BLEND;
     }
+
+    private Juice juice;
+
+    public JuiceOptions(Juice juice) {
+        this.juice = juice;
+    }
+
+    public Juice getJuice() {
+        return juice;
+    }
 }

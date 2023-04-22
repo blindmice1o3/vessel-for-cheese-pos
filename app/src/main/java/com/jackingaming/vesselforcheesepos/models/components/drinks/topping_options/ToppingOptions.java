@@ -32,4 +32,50 @@ public class ToppingOptions extends DrinkComponent {
     public enum WhippedCream {
         WHIPPED_CREAM;
     }
+
+    private CinnamonPowder cinnamonPowder;
+    private ColdFoam coldFoam;
+    private Drizzle drizzle;
+    private Topping topping;
+    private WhippedCream whippedCream;
+
+    public ToppingOptions(CinnamonPowder cinnamonPowder) {
+        this.cinnamonPowder = cinnamonPowder;
+    }
+
+    public ToppingOptions(ColdFoam coldFoam) {
+        this.coldFoam = coldFoam;
+    }
+
+    public ToppingOptions(Drizzle drizzle) {
+        this.drizzle = drizzle;
+    }
+
+    public ToppingOptions(Topping topping) {
+        this.topping = topping;
+    }
+
+    public ToppingOptions(WhippedCream whippedCream) {
+        this.whippedCream = whippedCream;
+    }
+
+    public CinnamonPowder getCinnamonPowder() {
+        return cinnamonPowder;
+    }
+
+    public ColdFoam getColdFoam() {
+        return coldFoam;
+    }
+
+    public Drizzle getDrizzle() {
+        return drizzle;
+    }
+
+    public Topping getTopping() {
+        return topping;
+    }
+
+    public WhippedCream getWhippedCream() {
+        return whippedCream;
+    }
 }

@@ -17,4 +17,32 @@ public class BlendedOptions extends DrinkComponent {
         NONE,
         DOUBLE_BLENDED;
     }
+
+    private FrapRoast frapRoast;
+    private FrapChips frapChips;
+    private BlendedPrep blendedPrep;
+
+    public BlendedOptions(FrapRoast frapRoast) {
+        this.frapRoast = frapRoast;
+    }
+
+    public BlendedOptions(FrapChips frapChips) {
+        this.frapChips = frapChips;
+    }
+
+    public BlendedOptions(BlendedPrep blendedPrep) {
+        this.blendedPrep = blendedPrep;
+    }
+
+    public FrapRoast getFrapRoast() {
+        return frapRoast;
+    }
+
+    public FrapChips getFrapChips() {
+        return frapChips;
+    }
+
+    public BlendedPrep getBlendedPrep() {
+        return blendedPrep;
+    }
 }

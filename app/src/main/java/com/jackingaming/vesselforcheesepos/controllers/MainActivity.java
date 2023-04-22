@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.controllers.input.InputPaneFragment;
-import com.jackingaming.vesselforcheesepos.controllers.input.InputFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputPaneFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input._top_level.InputFragment;
 import com.jackingaming.vesselforcheesepos.controllers.viewport.ViewportFragment;
 import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;

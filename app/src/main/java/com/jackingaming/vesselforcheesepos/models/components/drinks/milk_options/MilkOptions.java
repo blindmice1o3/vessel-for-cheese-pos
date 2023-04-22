@@ -29,4 +29,41 @@ public class MilkOptions extends DrinkComponent {
     public enum CappuccinoFoam {
         EXTRA_DRY, DRY, MEDIUM, WET, EXTRA_WET;
     }
+
+    private MilkBase milkBase;
+    private Temperature temperature;
+    private MilkFoam milkFoam;
+    private CappuccinoFoam cappuccinoFoam;
+
+    public MilkOptions(MilkBase milkBase) {
+        this.milkBase = milkBase;
+    }
+
+    public MilkOptions(Temperature temperature) {
+        this.temperature = temperature;
+    }
+
+    public MilkOptions(MilkFoam milkFoam) {
+        this.milkFoam = milkFoam;
+    }
+
+    public MilkOptions(CappuccinoFoam cappuccinoFoam) {
+        this.cappuccinoFoam = cappuccinoFoam;
+    }
+
+    public MilkBase getMilkBase() {
+        return milkBase;
+    }
+
+    public Temperature getTemperature() {
+        return temperature;
+    }
+
+    public MilkFoam getMilkFoam() {
+        return milkFoam;
+    }
+
+    public CappuccinoFoam getCappuccinoFoam() {
+        return cappuccinoFoam;
+    }
 }

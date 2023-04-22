@@ -18,4 +18,23 @@ public class SweetenerOptions extends DrinkComponent {
         SUGAR,
         SUGAR_IN_THE_RAW;
     }
+
+    private Liquid liquid;
+    private Packet packet;
+
+    public SweetenerOptions(Liquid liquid) {
+        this.liquid = liquid;
+    }
+
+    public SweetenerOptions(Packet packet) {
+        this.packet = packet;
+    }
+
+    public Liquid getLiquid() {
+        return liquid;
+    }
+
+    public Packet getPacket() {
+        return packet;
+    }
 }

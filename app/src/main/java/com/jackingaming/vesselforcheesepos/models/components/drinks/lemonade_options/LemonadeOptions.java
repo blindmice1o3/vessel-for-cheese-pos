@@ -9,4 +9,14 @@ public class LemonadeOptions extends DrinkComponent {
     public enum Lemonade {
         LEMONADE;
     }
+
+    private Lemonade lemonade;
+
+    public LemonadeOptions(Lemonade lemonade) {
+        this.lemonade = lemonade;
+    }
+
+    public Lemonade getLemonade() {
+        return lemonade;
+    }
 }

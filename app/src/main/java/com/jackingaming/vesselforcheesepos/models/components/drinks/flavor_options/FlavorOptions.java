@@ -24,4 +24,23 @@ public class FlavorOptions extends DrinkComponent {
         TOFFEE_NUT,
         VANILLA;
     }
+
+    private Sauce sauce;
+    private Syrup syrup;
+
+    public FlavorOptions(Sauce sauce) {
+        this.sauce = sauce;
+    }
+
+    public FlavorOptions(Syrup syrup) {
+        this.syrup = syrup;
+    }
+
+    public Sauce getSauce() {
+        return sauce;
+    }
+
+    public Syrup getSyrup() {
+        return syrup;
+    }
 }
