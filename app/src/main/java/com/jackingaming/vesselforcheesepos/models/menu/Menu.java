@@ -67,6 +67,44 @@ public class Menu {
 
     public enum CategorySidesOther {STEAMED_VEGETABLE;}
 
+    public static String parseDrinkComponentForStringRepresentation(DrinkComponent drinkComponent) {
+        String stringRepresentationOfDrinkComponent = null;
+        if (drinkComponent instanceof AddInsOptions) {
+            AddInsOptions addInsOptions = (AddInsOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = addInsOptions.toString();
+        } else if (drinkComponent instanceof BlendedOptions) {
+            BlendedOptions blendedOptions = (BlendedOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = blendedOptions.toString();
+        } else if (drinkComponent instanceof FlavorOptions) {
+            FlavorOptions flavorOptions = (FlavorOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = flavorOptions.toString();
+        } else if (drinkComponent instanceof JuiceOptions) {
+            JuiceOptions juiceOptions = (JuiceOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = juiceOptions.toString();
+        } else if (drinkComponent instanceof LemonadeOptions) {
+            LemonadeOptions lemonadeOptions = (LemonadeOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = lemonadeOptions.toString();
+        } else if (drinkComponent instanceof MilkOptions) {
+            MilkOptions milkOptions = (MilkOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = milkOptions.toString();
+        } else if (drinkComponent instanceof RefresherBaseOptions) {
+            RefresherBaseOptions refresherBaseOptions = (RefresherBaseOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = refresherBaseOptions.toString();
+        } else if (drinkComponent instanceof SweetenerOptions) {
+            SweetenerOptions sweetenerOptions = (SweetenerOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = sweetenerOptions.toString();
+        } else if (drinkComponent instanceof TeaOptions) {
+            TeaOptions teaOptions = (TeaOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = teaOptions.toString();
+        } else if (drinkComponent instanceof ToppingOptions) {
+            ToppingOptions toppingOptions = (ToppingOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = toppingOptions.toString();
+        } else {
+            stringRepresentationOfDrinkComponent = drinkComponent.getClass().getSimpleName();
+        }
+        return stringRepresentationOfDrinkComponent;
+    }
+
     // TODO: instantiateSyrupByButtonTag(String)
     // TODO: instantiateMilkByButtonTag(String)
     // TODO: instantiateCustomizationByButtonTag(String)

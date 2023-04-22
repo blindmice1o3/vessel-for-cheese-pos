@@ -1,6 +1,12 @@
 package com.jackingaming.vesselforcheesepos.models.components.drinks.topping_options;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.tea_options.TeaOptions;
+import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class ToppingOptions extends DrinkComponent {
     public static final String TAG = com.jackingaming.vesselforcheesepos.models.components.drinks.topping_options.ToppingOptions.class.getSimpleName();
@@ -77,5 +83,27 @@ public class ToppingOptions extends DrinkComponent {
 
     public WhippedCream getWhippedCream() {
         return whippedCream;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String nameToppingOptions = null;
+        if (cinnamonPowder != null) {
+            nameToppingOptions = CinnamonPowder.class.getSimpleName() + ": " + cinnamonPowder.name();
+        } else if (coldFoam != null) {
+            nameToppingOptions = ColdFoam.class.getSimpleName() + ": " + coldFoam.name();
+        } else if (drizzle != null) {
+            nameToppingOptions = Drizzle.class.getSimpleName() + ": " + drizzle.name();
+        } else if (topping != null) {
+            nameToppingOptions = Topping.class.getSimpleName() + ": " + topping.name();
+        } else if (whippedCream != null) {
+            nameToppingOptions = WhippedCream.class.getSimpleName() + ": " + whippedCream.name();
+        } else {
+            String errorMessage = ToppingOptions.class.getSimpleName() + ".toString() else-clause";
+            Log.e(TAG, errorMessage);
+            nameToppingOptions = errorMessage;
+        }
+        return nameToppingOptions;
     }
 }

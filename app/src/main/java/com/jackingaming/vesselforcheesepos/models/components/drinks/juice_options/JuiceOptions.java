@@ -1,6 +1,12 @@
 package com.jackingaming.vesselforcheesepos.models.components.drinks.juice_options;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
+import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class JuiceOptions extends DrinkComponent {
     public static final String TAG = JuiceOptions.class.getSimpleName();
@@ -19,5 +25,19 @@ public class JuiceOptions extends DrinkComponent {
 
     public Juice getJuice() {
         return juice;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String nameJuiceOptions = null;
+        if (juice != null) {
+            nameJuiceOptions = Juice.class.getSimpleName() + ": " + juice.name();
+        } else {
+            String errorMessage = JuiceOptions.class.getSimpleName() + ".toString() else-clause";
+            Log.e(TAG, errorMessage);
+            nameJuiceOptions = errorMessage;
+        }
+        return nameJuiceOptions;
     }
 }

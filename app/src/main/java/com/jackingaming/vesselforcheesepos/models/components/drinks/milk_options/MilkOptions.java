@@ -1,6 +1,12 @@
 package com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.juice_options.JuiceOptions;
+import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class MilkOptions extends DrinkComponent {
     public static final String TAG = MilkOptions.class.getSimpleName();
@@ -65,5 +71,25 @@ public class MilkOptions extends DrinkComponent {
 
     public CappuccinoFoam getCappuccinoFoam() {
         return cappuccinoFoam;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String nameMilkOptions = null;
+        if (milkBase != null) {
+            nameMilkOptions = MilkBase.class.getSimpleName() + ": " + milkBase.name();
+        } else if (temperature != null) {
+            nameMilkOptions = Temperature.class.getSimpleName() + ": " + temperature.name();
+        } else if (milkFoam != null) {
+            nameMilkOptions = MilkFoam.class.getSimpleName() + ": " + milkFoam.name();
+        } else if (cappuccinoFoam != null) {
+            nameMilkOptions = CappuccinoFoam.class.getSimpleName() + ": " + cappuccinoFoam.name();
+        } else {
+            String errorMessage = MilkOptions.class.getSimpleName() + ".toString() else-clause";
+            Log.e(TAG, errorMessage);
+            nameMilkOptions = errorMessage;
+        }
+        return nameMilkOptions;
     }
 }

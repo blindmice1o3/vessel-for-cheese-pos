@@ -1,6 +1,12 @@
 package com.jackingaming.vesselforcheesepos.models.components.drinks.blended_options;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
+import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class BlendedOptions extends DrinkComponent {
     public static final String TAG = BlendedOptions.class.getSimpleName();
@@ -44,5 +50,23 @@ public class BlendedOptions extends DrinkComponent {
 
     public BlendedPrep getBlendedPrep() {
         return blendedPrep;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String nameBlendedOptions = null;
+        if (frapRoast != null) {
+            nameBlendedOptions = FrapRoast.class.getSimpleName() + ": " + frapRoast.name();
+        } else if (frapChips != null) {
+            nameBlendedOptions = FrapChips.class.getSimpleName() + ": " + frapChips.name();
+        } else if (blendedPrep != null) {
+            nameBlendedOptions = BlendedPrep.class.getSimpleName() + ": " + blendedPrep.name();
+        } else {
+            String errorMessage = BlendedOptions.class.getSimpleName() + ".toString() else-clause";
+            Log.e(TAG, errorMessage);
+            nameBlendedOptions = errorMessage;
+        }
+        return nameBlendedOptions;
     }
 }

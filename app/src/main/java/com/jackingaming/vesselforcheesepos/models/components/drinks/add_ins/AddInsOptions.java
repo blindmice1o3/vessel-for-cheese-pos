@@ -1,6 +1,11 @@
 package com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class AddInsOptions extends DrinkComponent {
     public static final String TAG = AddInsOptions.class.getSimpleName();
@@ -111,5 +116,31 @@ public class AddInsOptions extends DrinkComponent {
 
     public Fruit getFruit() {
         return fruit;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String nameAddInsOptions = null;
+        if (lineTheCup != null) {
+            nameAddInsOptions = LineTheCup.class.getSimpleName() + ": " + lineTheCup.name();
+        } else if (milkCreamer != null) {
+            nameAddInsOptions = MilkCreamer.class.getSimpleName() + ": " + milkCreamer.name();
+        } else if (room != null) {
+            nameAddInsOptions = Room.class.getSimpleName() + ": " + room.name();
+        } else if (powder != null) {
+            nameAddInsOptions = Powder.class.getSimpleName() + ": " + powder.name();
+        } else if (water != null) {
+            nameAddInsOptions = Water.class.getSimpleName() + ": " + water.name();
+        } else if (ice != null) {
+            nameAddInsOptions = Ice.class.getSimpleName() + ": " + ice.name();
+        } else if (fruit != null) {
+            nameAddInsOptions = Fruit.class.getSimpleName() + ": " + fruit.name();
+        } else {
+            String errorMessage = AddInsOptions.class.getSimpleName() + ".toString() else-clause";
+            Log.e(TAG, errorMessage);
+            nameAddInsOptions = errorMessage;
+        }
+        return nameAddInsOptions;
     }
 }
