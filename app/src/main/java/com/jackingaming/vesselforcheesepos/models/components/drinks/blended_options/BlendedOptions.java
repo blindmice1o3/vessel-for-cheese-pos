@@ -5,8 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
-import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class BlendedOptions extends DrinkComponent {
     public static final String TAG = BlendedOptions.class.getSimpleName();

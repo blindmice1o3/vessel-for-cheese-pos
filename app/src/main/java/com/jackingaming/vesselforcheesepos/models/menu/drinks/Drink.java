@@ -31,6 +31,7 @@ public abstract class Drink extends MenuItem {
 
     public void addDrinkComponent(DrinkComponent drinkComponent) {
         Log.i(TAG, "addDrinkComponent(DrinkComponent)");
+        // TODO: screen for duplication (subclasses should override and add rules-check)
         customizedDrinkComponents.add(drinkComponent);
     }
 

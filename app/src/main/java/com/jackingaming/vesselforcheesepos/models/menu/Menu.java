@@ -7,14 +7,19 @@ import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkCompone
 import com.jackingaming.vesselforcheesepos.models.components.drinks.UndefinedDrinkComponent;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.blended_options.BlendedOptions;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.cup_options.CupOptions;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.espresso_options.EspressoOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.juice_options.JuiceOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.lemonade_options.LemonadeOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options.MilkOptions;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.preparation_options.PreparationOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.refresher_base_options.RefresherBaseOptions;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.size_options.SizeOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.sweetener_options.SweetenerOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.tea_options.TeaOptions;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.topping_options.ToppingOptions;
+import com.jackingaming.vesselforcheesepos.models.menu.drinks.brewed.Coffee;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.milk_based.lattes.Latte;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.espresso.straight_shots.ShotEspresso;
 import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
@@ -75,6 +80,12 @@ public class Menu {
         } else if (drinkComponent instanceof BlendedOptions) {
             BlendedOptions blendedOptions = (BlendedOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = blendedOptions.toString();
+        } else if (drinkComponent instanceof CupOptions) {
+            CupOptions cupOptions = (CupOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = cupOptions.toString();
+        } else if (drinkComponent instanceof EspressoOptions) {
+            EspressoOptions espressoOptions = (EspressoOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = espressoOptions.toString();
         } else if (drinkComponent instanceof FlavorOptions) {
             FlavorOptions flavorOptions = (FlavorOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = flavorOptions.toString();
@@ -87,9 +98,15 @@ public class Menu {
         } else if (drinkComponent instanceof MilkOptions) {
             MilkOptions milkOptions = (MilkOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = milkOptions.toString();
+        } else if (drinkComponent instanceof PreparationOptions) {
+            PreparationOptions preparationOptions = (PreparationOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = preparationOptions.toString();
         } else if (drinkComponent instanceof RefresherBaseOptions) {
             RefresherBaseOptions refresherBaseOptions = (RefresherBaseOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = refresherBaseOptions.toString();
+        } else if (drinkComponent instanceof SizeOptions) {
+            SizeOptions sizeOptions = (SizeOptions) drinkComponent;
+            stringRepresentationOfDrinkComponent = sizeOptions.toString();
         } else if (drinkComponent instanceof SweetenerOptions) {
             SweetenerOptions sweetenerOptions = (SweetenerOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = sweetenerOptions.toString();
@@ -100,7 +117,12 @@ public class Menu {
             ToppingOptions toppingOptions = (ToppingOptions) drinkComponent;
             stringRepresentationOfDrinkComponent = toppingOptions.toString();
         } else {
-            stringRepresentationOfDrinkComponent = drinkComponent.getClass().getSimpleName();
+            if (drinkComponent instanceof UndefinedDrinkComponent) {
+                UndefinedDrinkComponent undefinedDrinkComponent = (UndefinedDrinkComponent) drinkComponent;
+                stringRepresentationOfDrinkComponent = undefinedDrinkComponent.toString();
+            } else {
+                stringRepresentationOfDrinkComponent = drinkComponent.getClass().getSimpleName();
+            }
         }
         return stringRepresentationOfDrinkComponent;
     }
@@ -253,6 +275,12 @@ public class Menu {
         // DRINKS
         else if (tagOfSelectedButton.equals(Water.NAME_DEFAULT)) {
             menuItemSelected = new Water();
+        } else if (tagOfSelectedButton.equals(Coffee.NAME_DEFAULT)) {
+            menuItemSelected = new Coffee();
+        } else if (tagOfSelectedButton.equals(Latte.NAME_DEFAULT)) {
+            menuItemSelected = new Latte();
+        } else if (tagOfSelectedButton.equals(ShotEspresso.NAME_DEFAULT)) {
+            menuItemSelected = new ShotEspresso();
         }
         // SIDES
         else if (tagOfSelectedButton.equals(SteamedVegetable.NAME_DEFAULT)) {
@@ -292,9 +320,9 @@ public class Menu {
         List<String> allDrinks = new ArrayList<String>();
 
         allDrinks.add(Water.NAME_DEFAULT);
-        allDrinks.add("NULL");
-        allDrinks.add("NULL");
-        allDrinks.add("NULL");
+        allDrinks.add(Coffee.NAME_DEFAULT);
+        allDrinks.add(Latte.NAME_DEFAULT);
+        allDrinks.add(ShotEspresso.NAME_DEFAULT);
         allDrinks.add("NULL");
 
         allDrinks.add("NULL");

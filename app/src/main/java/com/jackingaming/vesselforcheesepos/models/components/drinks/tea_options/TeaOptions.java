@@ -5,8 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweetener_options.SweetenerOptions;
-import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class TeaOptions extends DrinkComponent {
     public static final String TAG = TeaOptions.class.getSimpleName();

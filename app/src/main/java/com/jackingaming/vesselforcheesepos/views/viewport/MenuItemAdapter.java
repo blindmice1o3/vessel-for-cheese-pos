@@ -172,7 +172,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public void bind(Drink drinkSelected) {
             tvName.setText(drinkSelected.getName());
-            tvPrice.setText(Double.toString(drinkSelected.getPrice()));
+            tvPrice.setText(String.format("%.2f", drinkSelected.getPrice()));
             tvSize.setText(drinkSelected.getSize().name());
             String isIced = (drinkSelected.isIced()) ? "iced" : "not iced";
             tvIced.setText(isIced);
@@ -257,7 +257,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public void bind(MenuItem itemSelected) {
             tvName.setText(itemSelected.getName());
-            tvPrice.setText(Double.toString(itemSelected.getPrice()));
+            tvPrice.setText(String.format("%.2f", itemSelected.getPrice()));
         }
 
         @Override
@@ -298,7 +298,7 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public void bind(MenuItem itemSelected) {
             tvName.setText(
-                    "(name: " + itemSelected.getName() + "), (price: " + Double.toString(itemSelected.getPrice()) + ")"
+                    "(name: " + itemSelected.getName() + "), (price: " + String.format("%.2f", itemSelected.getPrice()) + ")"
             );
         }
 

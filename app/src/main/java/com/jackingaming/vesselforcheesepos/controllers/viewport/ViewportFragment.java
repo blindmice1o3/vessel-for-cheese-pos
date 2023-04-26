@@ -200,10 +200,18 @@ public class ViewportFragment extends Fragment {
         MenuItem menuItemSelected = menuItems.get(indexSelected);
         if (menuItemSelected instanceof Drink) {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is a Drink.");
+            // TODO: maybe cast menuItemSelected to Drink,
+            //  adapter.addDrinkComponentToSelectedDrink(int indexSelected, DrinkComponent drinkComponentToBeAdded),
+            //  (in which... call Drink.addDrinkComponent() and have some adapter notifyItemInserted(indexSelected)
             RecyclerView.ViewHolder viewHolderDrinkSelected = rvStagingArea.findViewHolderForAdapterPosition(indexSelected);
             adapter.addDrinkComponentToSelectedDrink(viewHolderDrinkSelected, drinkComponent);
         } else {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is NOT a Drink.");
+
+            String errorMessage = "Attempting to add DrinkComponent to non-Drink MenuItem";
+            Log.e(TAG, errorMessage);
+            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+
         }
     }
 }

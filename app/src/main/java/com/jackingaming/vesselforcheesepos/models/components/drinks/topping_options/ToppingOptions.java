@@ -5,11 +5,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.tea_options.TeaOptions;
-import com.jackingaming.vesselforcheesepos.views.viewport.CustomizedDrinkComponentAdapter;
 
 public class ToppingOptions extends DrinkComponent {
-    public static final String TAG = com.jackingaming.vesselforcheesepos.models.components.drinks.topping_options.ToppingOptions.class.getSimpleName();
+    public static final String TAG = ToppingOptions.class.getSimpleName();
 
     // TODO: NONE, LIGHT, MEDIUM, EXTRA;
     public enum CinnamonPowder {
