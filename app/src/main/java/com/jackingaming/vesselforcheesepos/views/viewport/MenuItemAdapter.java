@@ -134,23 +134,6 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return menuItems.size();
     }
 
-    public void addMenuItem(MenuItem menuItem) {
-        int indexNewEnd = menuItems.size();
-        menuItems.add(menuItem);
-        notifyItemInserted(indexNewEnd);
-    }
-
-    public void removeMenuItem(int indexSelected) {
-        menuItems.remove(indexSelected);
-        notifyItemRemoved(indexSelected);
-    }
-
-    public void addDrinkComponentToSelectedDrink(RecyclerView.ViewHolder viewHolderDrinkSelected, DrinkComponent drinkComponentToBeAdded) {
-        RecyclerView rvCustomizedDrinkComponents = ((ViewHolderDrink) viewHolderDrinkSelected).getRvCustomizedDrinkComponents();
-        CustomizedDrinkComponentAdapter customizedDrinkComponentAdapter = (CustomizedDrinkComponentAdapter) rvCustomizedDrinkComponents.getAdapter();
-        customizedDrinkComponentAdapter.addDrinkComponent(drinkComponentToBeAdded);
-    }
-
     public class ViewHolderDrink extends RecyclerView.ViewHolder
             implements View.OnClickListener, View.OnLongClickListener {
         private TextView tvName;
@@ -197,7 +180,8 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         public void onCustomizedDrinkComponentLongClicked(int position) {
                             Toast.makeText(rvCustomizedDrinkComponents.getContext(), "onCustomizedDrinkComponentLongClicked(int) position: " + position, Toast.LENGTH_SHORT).show();
 
-                            ((CustomizedDrinkComponentAdapter) rvCustomizedDrinkComponents.getAdapter()).removeDrinkComponent(position);
+                            customizedDrinkComponents.remove(position);
+                            rvCustomizedDrinkComponents.getAdapter().notifyItemRemoved(position);
                         }
                     });
             rvCustomizedDrinkComponents.setAdapter(adapter);

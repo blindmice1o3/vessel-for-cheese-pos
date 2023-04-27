@@ -169,7 +169,8 @@ public class ViewportFragment extends Fragment {
 
                     @Override
                     public void onMenuItemLongClicked(int position, View view) {
-                        adapter.removeMenuItem(position);
+                        menuItems.remove(position);
+                        adapter.notifyItemRemoved(position);
 
                         resetViewSelected();
                     }
@@ -188,7 +189,9 @@ public class ViewportFragment extends Fragment {
     }
 
     public void addMenuItem(MenuItem menuItem) {
-        adapter.addMenuItem(menuItem);
+        int indexNewEnd = menuItems.size();
+        menuItems.add(menuItem);
+        adapter.notifyItemInserted(indexNewEnd);
     }
 
     public void addDrinkComponent(DrinkComponent drinkComponent) {
@@ -200,11 +203,10 @@ public class ViewportFragment extends Fragment {
         MenuItem menuItemSelected = menuItems.get(indexSelected);
         if (menuItemSelected instanceof Drink) {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is a Drink.");
-            // TODO: maybe cast menuItemSelected to Drink,
-            //  adapter.addDrinkComponentToSelectedDrink(int indexSelected, DrinkComponent drinkComponentToBeAdded),
-            //  (in which... call Drink.addDrinkComponent() and have some adapter notifyItemInserted(indexSelected)
-            RecyclerView.ViewHolder viewHolderDrinkSelected = rvStagingArea.findViewHolderForAdapterPosition(indexSelected);
-            adapter.addDrinkComponentToSelectedDrink(viewHolderDrinkSelected, drinkComponent);
+            
+            Drink drinkSelected = (Drink) menuItemSelected;
+            drinkSelected.addDrinkComponent(drinkComponent);
+            adapter.notifyItemChanged(indexSelected);
         } else {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is NOT a Drink.");
 

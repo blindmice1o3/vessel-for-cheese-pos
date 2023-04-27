@@ -12,16 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.add_ins.AddInsOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.blended_options.BlendedOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.FlavorOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.juice_options.JuiceOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.lemonade_options.LemonadeOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.milk_options.MilkOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.refresher_base_options.RefresherBaseOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.sweetener_options.SweetenerOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.tea_options.TeaOptions;
-import com.jackingaming.vesselforcheesepos.models.components.drinks.topping_options.ToppingOptions;
 import com.jackingaming.vesselforcheesepos.models.menu.Menu;
 
 import java.util.List;
@@ -64,17 +54,6 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
     @Override
     public int getItemCount() {
         return customizedDrinkComponents.size();
-    }
-
-    public void addDrinkComponent(DrinkComponent drinkComponent) {
-        int indexNewEnd = customizedDrinkComponents.size();
-        customizedDrinkComponents.add(drinkComponent);
-        notifyItemInserted(indexNewEnd);
-    }
-
-    public void removeDrinkComponent(int indexSelected) {
-        customizedDrinkComponents.remove(indexSelected);
-        notifyItemRemoved(indexSelected);
     }
 
     public class ViewHolderCustomizedDrinkComponent extends RecyclerView.ViewHolder
