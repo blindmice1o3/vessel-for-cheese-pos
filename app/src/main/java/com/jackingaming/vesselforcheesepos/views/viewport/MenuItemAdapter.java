@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
-import com.jackingaming.vesselforcheesepos.models.menu.foods.Food;
-import com.jackingaming.vesselforcheesepos.models.menu.sides.Side;
+import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu_items.drinks.Drink;
+import com.jackingaming.vesselforcheesepos.models.menu_items.foods.Food;
+import com.jackingaming.vesselforcheesepos.models.menu_items.sides.Side;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -156,9 +157,9 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void bind(Drink drinkSelected) {
             tvName.setText(drinkSelected.getName());
             tvPrice.setText(String.format("%.2f", drinkSelected.getPrice()));
-            tvSize.setText(drinkSelected.getSize().name());
-            String isIced = (drinkSelected.isIced()) ? "iced" : "not iced";
-            tvIced.setText(isIced);
+            tvSize.setText(drinkSelected.getDrinkSize().name());
+//            String isIced = (drinkSelected.isIced()) ? "iced" : "not iced";
+//            tvIced.setText(isIced);
             initRvCustomizedDrinkComponents(drinkSelected);
         }
 
@@ -167,7 +168,9 @@ public class MenuItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
 
         private void initRvCustomizedDrinkComponents(Drink drinkSelected) {
-            List<DrinkComponent> customizedDrinkComponents = drinkSelected.getCustomizedDrinkComponents();
+            // TODO:
+//            List<DrinkComponent> customizedDrinkComponents = drinkSelected.getCustomizedDrinkComponents();
+            List<DrinkComponent> customizedDrinkComponents = new ArrayList<>();
             CustomizedDrinkComponentAdapter adapter = new CustomizedDrinkComponentAdapter(
                     customizedDrinkComponents,
                     new CustomizedDrinkComponentAdapter.CustomizedDrinkComponentAdapterListener() {

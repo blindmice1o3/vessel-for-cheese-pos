@@ -2,14 +2,6 @@ package com.jackingaming.vesselforcheesepos.controllers.viewport;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +10,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.menu.drinks.Drink;
-import com.jackingaming.vesselforcheesepos.models.menu.drinks.other.Water;
-import com.jackingaming.vesselforcheesepos.models.menu.foods.Bread;
+import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu_items.drinks.Drink;
+import com.jackingaming.vesselforcheesepos.models.menu_items.drinks.other.cold.water.FilteredTapWater;
+import com.jackingaming.vesselforcheesepos.models.menu_items.foods.Bread;
 import com.jackingaming.vesselforcheesepos.views.viewport.MenuItemAdapter;
 
 import java.util.ArrayList;
@@ -154,7 +153,7 @@ public class ViewportFragment extends Fragment {
         tvIndexDisplayer.setText(Integer.toString(indexSelected));
 
         menuItems.add(new Bread());
-        menuItems.add(new Water());
+        menuItems.add(new FilteredTapWater());
 
         adapter = new MenuItemAdapter(menuItems,
                 new MenuItemAdapter.MenuItemAdapterListener() {
@@ -203,9 +202,11 @@ public class ViewportFragment extends Fragment {
         MenuItem menuItemSelected = menuItems.get(indexSelected);
         if (menuItemSelected instanceof Drink) {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is a Drink.");
-            
+
             Drink drinkSelected = (Drink) menuItemSelected;
-            drinkSelected.addDrinkComponent(drinkComponent);
+            // TODO:
+            Log.e(TAG, "DOES not DO ANYTHING AT THE MOMENT");
+//            drinkSelected.addDrinkComponent(drinkComponent);
             adapter.notifyItemChanged(indexSelected);
         } else {
             Log.i(TAG, "addDrinkComponent(DrinkComponent) menuItemSelected is NOT a Drink.");

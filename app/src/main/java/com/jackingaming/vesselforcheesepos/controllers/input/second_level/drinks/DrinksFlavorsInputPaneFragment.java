@@ -7,19 +7,24 @@ import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputPaneTabbedFragment;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.Syrup;
 import com.jackingaming.vesselforcheesepos.models.menu.Menu;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DrinksFlavorsInputPaneFragment extends InputPaneTabbedFragment {
     public static final String TAG = DrinksFlavorsInputPaneFragment.class.getSimpleName();
-    public static final int NUM_OF_ROWS_DEFAULT = 6;
-    public static final int NUM_OF_COLUMNS_DEFAULT = 5;
+    public static final int NUM_OF_ROWS_DEFAULT = 1;
+    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
-    private List<String> buttonTitleFlavors = Menu.createListOfButtonTitleFlavors();
+    // TODO:
+//    private List<String> buttonTitleFlavors = Menu.createListOfButtonTitleFlavors();
+    private List<String> buttonTitleFlavors = Arrays.asList("Brown Sugar Syrup");
 
     public static DrinksFlavorsInputPaneFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
@@ -66,7 +71,9 @@ public class DrinksFlavorsInputPaneFragment extends InputPaneTabbedFragment {
             @Override
             public void onClick(View view) {
                 String tagOfSelectedButton = (String) view.getTag();
-                DrinkComponent customizedDrinkComponent = Menu.instantiateDrinkComponentByButtonTag(tagOfSelectedButton);
+                // TODO:
+//                DrinkComponent customizedDrinkComponent = Menu.instantiateDrinkComponentByButtonTag(tagOfSelectedButton);
+                DrinkComponent customizedDrinkComponent = new Syrup(Syrup.Type.BROWN_SUGAR_SYRUP, 1);
                 inputPaneFragmentListener.onDrinkComponentClicked(customizedDrinkComponent);
             }
         });

@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.menu.Menu;
 
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class CustomizedDrinkComponentAdapter extends RecyclerView.Adapter<Recycl
         }
 
         public void bind(DrinkComponent drinkComponent) {
-            String stringRepresentationOfDrinkComponent = Menu.parseDrinkComponentForStringRepresentation(drinkComponent);
+            String stringRepresentationOfDrinkComponent = drinkComponent.getId();
             tvName.setText(stringRepresentationOfDrinkComponent);
         }
 

@@ -18,7 +18,7 @@ import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
-import com.jackingaming.vesselforcheesepos.models.menu.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
 
 public abstract class InputPaneFragment extends Fragment {
     public static final String TAG = InputPaneFragment.class.getSimpleName();
