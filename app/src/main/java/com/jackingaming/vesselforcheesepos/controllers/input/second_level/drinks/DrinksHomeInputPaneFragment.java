@@ -7,25 +7,54 @@ import android.widget.Button;
 
 import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputPaneTabbedFragment;
 import com.jackingaming.vesselforcheesepos.models.menu.Menu;
+import com.jackingaming.vesselforcheesepos.models.menu.hierarchy.Section;
 import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.menu_items.drinks.other.cold.water.FilteredTapWater;
-import com.jackingaming.vesselforcheesepos.models.menu_items.foods.Bread;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
     public static final String TAG = DrinksHomeInputPaneFragment.class.getSimpleName();
-    public static final int NUM_OF_ROWS_DEFAULT = 1;
-    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
+    //    public static final int NUM_OF_ROWS_DEFAULT = 1;
+//    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
+    public static final int NUM_OF_COLUMNS_DEFAULT = 5;
+    public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
+            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+
+    private static int determineNumOfRowsDefault(int numOfColumns, int sizeOfCollection) {
+        int numOfRowsDefault = 0;
+
+        if (sizeOfCollection % numOfColumns == 0) {
+            numOfRowsDefault = sizeOfCollection / numOfColumns;
+        } else {
+            numOfRowsDefault = (sizeOfCollection / numOfColumns) + 1;
+        }
+
+        return numOfRowsDefault;
+    }
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
     // TODO:
 //    private List<String> buttonTitleDrinks = Menu.createListOfButtonTitleDrinks();
-    private List<String> buttonTitleDrinks = Arrays.asList("Filtered Tap Water");
+    private List<String> buttonTitleDrinks = new ArrayList<>();
+
+    {
+        for (Section section : Menu.blendedBeverages) {
+            for (MenuItem menuItem : section.getMenuItems()) {
+                buttonTitleDrinks.add(
+                        menuItem.getId()
+                );
+            }
+        }
+        if (buttonTitleDrinks.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
+            int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleDrinks.size();
+            for (int i = 0; i < numberOfEmptyButton; i++) {
+                buttonTitleDrinks.add("");
+            }
+        }
+    }
 
     public static DrinksHomeInputPaneFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
@@ -75,8 +104,23 @@ public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
                 Log.i(TAG, tagOfSelectedButton);
                 // TODO:
 //                MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
-                MenuItem menuItemSelected = new FilteredTapWater();
-                inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+
+                if (!tagOfSelectedButton.equals("")) {
+                    MenuItem menuItemSelected = null;
+                    for (Section section : Menu.blendedBeverages) {
+                        for (MenuItem menuItem : section.getMenuItems()) {
+                            if (tagOfSelectedButton.equals(menuItem.getId())) {
+                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
+                            } else {
+                                Log.e(TAG, "could NOT find the selected menu item");
+                            }
+                        }
+                    }
+                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                } else {
+                    Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
+                }
+
             }
         });
     }

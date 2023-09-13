@@ -15,15 +15,15 @@ import java.util.List;
 
 public class FoodsInputPaneFragment extends InputPaneFragment {
     public static final String TAG = FoodsInputPaneFragment.class.getSimpleName();
-    public static final int NUM_OF_ROWS_DEFAULT = 1;
-    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
+    public static final int NUM_OF_ROWS_DEFAULT = 2;
+    public static final int NUM_OF_COLUMNS_DEFAULT = 2;
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
     // TODO:
 //    private List<String> buttonTitleFoods = Menu.createListOfButtonTitleFoods();
-    private List<String> buttonTitleFoods = Arrays.asList("Bread");
+    private List<String> buttonTitleFoods = Arrays.asList("Bread", "Bread", "Bread", "Bread");
 
     public static FoodsInputPaneFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");

@@ -2,13 +2,6 @@ package com.jackingaming.vesselforcheesepos.controllers.input.second_level;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -16,9 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.Fragment;
+
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
+import com.jackingaming.vesselforcheesepos.models.menu_items.drinks.Drink;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public abstract class InputPaneFragment extends Fragment {
     public static final String TAG = InputPaneFragment.class.getSimpleName();
@@ -85,6 +91,35 @@ public abstract class InputPaneFragment extends Fragment {
     protected abstract void initButtonText(Button buttonNew);
 
     protected abstract void initOnClickListener(Button buttonNew);
+
+    protected Drink createCopyOfMenuItemFromMenu(MenuItem menuItem) {
+        if (menuItem instanceof Drink) {
+            Log.i(TAG, "menuItem instanceof Drink");
+
+            Drink original = (Drink) menuItem;
+            Drink copy = null;
+            try {
+                // Serialize the object
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(baos);
+                oos.writeObject(original);
+                oos.close();
+
+                // Deserialize the object
+                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+                ObjectInputStream ois = new ObjectInputStream(bais);
+                copy = (Drink) ois.readObject();
+            } catch (IOException | ClassNotFoundException exception) {
+                exception.printStackTrace();
+            }
+
+            return copy;
+        } else {
+            Log.e(TAG, "NOT menuItem instanceof Drink");
+
+            return null;
+        }
+    }
 
     private void initButtons() {
         Log.i(TAG, "initButtons()");

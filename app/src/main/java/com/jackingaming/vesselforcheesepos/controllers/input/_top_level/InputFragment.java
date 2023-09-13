@@ -1,16 +1,15 @@
 package com.jackingaming.vesselforcheesepos.controllers.input._top_level;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.jackingaming.vesselforcheesepos.R;
 import com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks.DrinksHomeInputPaneFragment;

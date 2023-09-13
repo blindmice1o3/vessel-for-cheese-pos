@@ -9,21 +9,20 @@ import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputP
 import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
 import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.Sauce;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class DrinksMilksInputPaneFragment extends InputPaneTabbedFragment {
     public static final String TAG = DrinksMilksInputPaneFragment.class.getSimpleName();
-    public static final int NUM_OF_ROWS_DEFAULT = 1;
-    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
+    public static final int NUM_OF_ROWS_DEFAULT = 2;
+    public static final int NUM_OF_COLUMNS_DEFAULT = 2;
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
     // TODO:
 //    private List<String> buttonTitleMilks = Menu.createListOfButtonTitleMilkBases();
-    private List<String> buttonTitleMilks = Arrays.asList("New Dark Caramel Sauce");
+    private List<String> buttonTitleMilks = Arrays.asList("New Dark Caramel Sauce", "New Dark Caramel Sauce", "New Dark Caramel Sauce", "New Dark Caramel Sauce");
 
     public static DrinksMilksInputPaneFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
