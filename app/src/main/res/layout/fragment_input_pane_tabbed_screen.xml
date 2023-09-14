@@ -8,7 +8,7 @@
         android:id="@+id/constraintlayout_input_pane"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/horizontal_bottom_buttons"
         app:layout_constraintEnd_toStartOf="@id/vertical_buttons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,5 +22,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/constraintlayout_input_pane"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/horizontal_bottom_buttons"
+        layout="@layout/fragment_input_drink_horizontal_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/constraintlayout_input_pane"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintlayout_input_pane" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

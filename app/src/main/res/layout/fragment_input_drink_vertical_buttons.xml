@@ -6,7 +6,13 @@
 
     <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
         android:id="@+id/vtv_syrups"
-        style="@style/PurpleVerticalTab"
+        style="@style/PurpleTab"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
         android:text="syrups"
         app:layout_constraintBottom_toTopOf="@id/vtv_milks"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,7 +21,13 @@
 
     <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
         android:id="@+id/vtv_milks"
-        style="@style/PurpleVerticalTab"
+        style="@style/PurpleTab"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
         android:text="milks"
         app:layout_constraintBottom_toTopOf="@id/vtv_customizations"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +36,13 @@
 
     <com.jackingaming.vesselforcheesepos.views.input.VerticalTextView
         android:id="@+id/vtv_customizations"
-        style="@style/PurpleVerticalTab"
+        style="@style/PurpleTab"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="2dp"
         android:text="customizations"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

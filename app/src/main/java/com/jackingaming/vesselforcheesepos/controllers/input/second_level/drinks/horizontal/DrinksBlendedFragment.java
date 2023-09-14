@@ -1,11 +1,11 @@
-package com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks;
+package com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks.horizontal;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputPaneTabbedFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.TabbedInputPaneFragment;
 import com.jackingaming.vesselforcheesepos.models.menu.Menu;
 import com.jackingaming.vesselforcheesepos.models.menu.hierarchy.Section;
 import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
@@ -13,52 +13,38 @@ import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
-    public static final String TAG = DrinksHomeInputPaneFragment.class.getSimpleName();
-    //    public static final int NUM_OF_ROWS_DEFAULT = 1;
-//    public static final int NUM_OF_COLUMNS_DEFAULT = 1;
+public class DrinksBlendedFragment extends TabbedInputPaneFragment {
+    public static final String TAG = DrinksBlendedFragment.class.getSimpleName();
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
+    // TODO:
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
             NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
-
-    private static int determineNumOfRowsDefault(int numOfColumns, int sizeOfCollection) {
-        int numOfRowsDefault = 0;
-
-        if (sizeOfCollection % numOfColumns == 0) {
-            numOfRowsDefault = sizeOfCollection / numOfColumns;
-        } else {
-            numOfRowsDefault = (sizeOfCollection / numOfColumns) + 1;
-        }
-
-        return numOfRowsDefault;
-    }
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
-    // TODO:
-//    private List<String> buttonTitleDrinks = Menu.createListOfButtonTitleDrinks();
-    private List<String> buttonTitleDrinks = new ArrayList<>();
+    private List<String> buttonTitleBlended = new ArrayList<>();
 
     {
+        // TODO:
         for (Section section : Menu.blendedBeverages) {
             for (MenuItem menuItem : section.getMenuItems()) {
-                buttonTitleDrinks.add(
+                buttonTitleBlended.add(
                         menuItem.getId()
                 );
             }
         }
-        if (buttonTitleDrinks.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
-            int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleDrinks.size();
+        if (buttonTitleBlended.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
+            int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleBlended.size();
             for (int i = 0; i < numberOfEmptyButton; i++) {
-                buttonTitleDrinks.add("");
+                buttonTitleBlended.add("");
             }
         }
     }
 
-    public static DrinksHomeInputPaneFragment newInstance(int param1, int param2) {
+    public static DrinksBlendedFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
-        DrinksHomeInputPaneFragment fragment = new DrinksHomeInputPaneFragment();
+        DrinksBlendedFragment fragment = new DrinksBlendedFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_NUM_OF_ROWS, param1);
         args.putInt(ARG_NUM_OF_COLUMNS, param2);
@@ -89,7 +75,7 @@ public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
     protected void initButtonText(Button buttonNew) {
         Log.i(TAG, "initButtonText()");
         buttonNew.setText(
-                buttonTitleDrinks.get(indexButtonTitle)
+                buttonTitleBlended.get(indexButtonTitle)
         );
         indexButtonTitle++;
     }
@@ -102,11 +88,10 @@ public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
             public void onClick(View view) {
                 String tagOfSelectedButton = (String) view.getTag();
                 Log.i(TAG, tagOfSelectedButton);
-                // TODO:
-//                MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
                     MenuItem menuItemSelected = null;
+                    // TODO:
                     for (Section section : Menu.blendedBeverages) {
                         for (MenuItem menuItem : section.getMenuItems()) {
                             if (tagOfSelectedButton.equals(menuItem.getId())) {
@@ -120,7 +105,6 @@ public class DrinksHomeInputPaneFragment extends InputPaneTabbedFragment {
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }
-
             }
         });
     }

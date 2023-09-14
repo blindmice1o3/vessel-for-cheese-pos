@@ -12,9 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.jackingaming.vesselforcheesepos.R;
-import com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks.DrinksHomeInputPaneFragment;
-import com.jackingaming.vesselforcheesepos.controllers.input.second_level.foods.FoodsInputPaneFragment;
-import com.jackingaming.vesselforcheesepos.controllers.input.second_level.sides.SidesInputPaneFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks.DrinksHomeFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.foods.FoodsFragment;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.sides.SidesFragment;
 
 public class InputFragment extends Fragment {
     public static final String TAG = InputFragment.class.getSimpleName();
@@ -90,35 +90,35 @@ public class InputFragment extends Fragment {
         if (savedInstanceState == null) {
             Log.i(TAG, "savedInstanceState == null");
 
-            Fragment fragmentFoods = FoodsInputPaneFragment.newInstance(
-                    FoodsInputPaneFragment.NUM_OF_ROWS_DEFAULT,
-                    FoodsInputPaneFragment.NUM_OF_COLUMNS_DEFAULT);
+            Fragment fragmentFoods = FoodsFragment.newInstance(
+                    FoodsFragment.NUM_OF_ROWS_DEFAULT,
+                    FoodsFragment.NUM_OF_COLUMNS_DEFAULT);
             replaceFragmentInInputPaneWith(fragmentFoods);
 
             buttonFoods.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragmentFoods = FoodsInputPaneFragment.newInstance(
-                            FoodsInputPaneFragment.NUM_OF_ROWS_DEFAULT,
-                            FoodsInputPaneFragment.NUM_OF_COLUMNS_DEFAULT);
+                    Fragment fragmentFoods = FoodsFragment.newInstance(
+                            FoodsFragment.NUM_OF_ROWS_DEFAULT,
+                            FoodsFragment.NUM_OF_COLUMNS_DEFAULT);
                     replaceFragmentInInputPaneWith(fragmentFoods);
                 }
             });
             buttonDrinks.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragmentDrinksHome = DrinksHomeInputPaneFragment.newInstance(
-                            DrinksHomeInputPaneFragment.NUM_OF_ROWS_DEFAULT,
-                            DrinksHomeInputPaneFragment.NUM_OF_COLUMNS_DEFAULT);
+                    Fragment fragmentDrinksHome = DrinksHomeFragment.newInstance(
+                            DrinksHomeFragment.NUM_OF_ROWS_DEFAULT,
+                            DrinksHomeFragment.NUM_OF_COLUMNS_DEFAULT);
                     replaceFragmentInInputPaneWith(fragmentDrinksHome);
                 }
             });
             buttonSides.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragmentSides = SidesInputPaneFragment.newInstance(
-                            SidesInputPaneFragment.NUM_OF_ROWS_DEFAULT,
-                            SidesInputPaneFragment.NUM_OF_COLUMNS_DEFAULT);
+                    Fragment fragmentSides = SidesFragment.newInstance(
+                            SidesFragment.NUM_OF_ROWS_DEFAULT,
+                            SidesFragment.NUM_OF_COLUMNS_DEFAULT);
                     replaceFragmentInInputPaneWith(fragmentSides);
                 }
             });

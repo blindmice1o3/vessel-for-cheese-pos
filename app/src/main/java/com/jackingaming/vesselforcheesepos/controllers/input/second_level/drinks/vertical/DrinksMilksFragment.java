@@ -1,20 +1,19 @@
-package com.jackingaming.vesselforcheesepos.controllers.input.second_level.foods;
+package com.jackingaming.vesselforcheesepos.controllers.input.second_level.drinks.vertical;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.jackingaming.vesselforcheesepos.controllers.input.second_level.InputPaneFragment;
-import com.jackingaming.vesselforcheesepos.models.menu_items.MenuItem;
-import com.jackingaming.vesselforcheesepos.models.menu_items.foods.Bread;
+import com.jackingaming.vesselforcheesepos.controllers.input.second_level.TabbedInputPaneFragment;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.DrinkComponent;
+import com.jackingaming.vesselforcheesepos.models.components.drinks.flavor_options.Sauce;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FoodsInputPaneFragment extends InputPaneFragment {
-    public static final String TAG = FoodsInputPaneFragment.class.getSimpleName();
+public class DrinksMilksFragment extends TabbedInputPaneFragment {
+    public static final String TAG = DrinksMilksFragment.class.getSimpleName();
     public static final int NUM_OF_ROWS_DEFAULT = 2;
     public static final int NUM_OF_COLUMNS_DEFAULT = 2;
 
@@ -22,12 +21,12 @@ public class FoodsInputPaneFragment extends InputPaneFragment {
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
 
     // TODO:
-//    private List<String> buttonTitleFoods = Menu.createListOfButtonTitleFoods();
-    private List<String> buttonTitleFoods = Arrays.asList("Bread", "Bread", "Bread", "Bread");
+//    private List<String> buttonTitleMilks = Menu.createListOfButtonTitleMilkBases();
+    private List<String> buttonTitleMilks = Arrays.asList("New Dark Caramel Sauce", "New Dark Caramel Sauce", "New Dark Caramel Sauce", "New Dark Caramel Sauce");
 
-    public static FoodsInputPaneFragment newInstance(int param1, int param2) {
+    public static DrinksMilksFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
-        FoodsInputPaneFragment fragment = new FoodsInputPaneFragment();
+        DrinksMilksFragment fragment = new DrinksMilksFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_NUM_OF_ROWS, param1);
         args.putInt(ARG_NUM_OF_COLUMNS, param2);
@@ -58,7 +57,7 @@ public class FoodsInputPaneFragment extends InputPaneFragment {
     protected void initButtonText(Button buttonNew) {
         Log.i(TAG, "initButtonText()");
         buttonNew.setText(
-                buttonTitleFoods.get(indexButtonTitle)
+                buttonTitleMilks.get(indexButtonTitle)
         );
         indexButtonTitle++;
     }
@@ -70,11 +69,10 @@ public class FoodsInputPaneFragment extends InputPaneFragment {
             @Override
             public void onClick(View view) {
                 String tagOfSelectedButton = (String) view.getTag();
-                Log.i(TAG, tagOfSelectedButton);
                 // TODO:
-//                MenuItem menuItemSelected = Menu.instantiateMenuItemByButtonTag(tagOfSelectedButton);
-                MenuItem menuItemSelected = new Bread();
-                inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+//                DrinkComponent customizedDrinkComponent = Menu.instantiateDrinkComponentByButtonTag(tagOfSelectedButton);
+                DrinkComponent customizedDrinkComponent = new Sauce(Sauce.Type.NEW_DARK_CARAMEL_SAUCE, 1);
+                inputPaneFragmentListener.onDrinkComponentClicked(customizedDrinkComponent);
             }
         });
     }

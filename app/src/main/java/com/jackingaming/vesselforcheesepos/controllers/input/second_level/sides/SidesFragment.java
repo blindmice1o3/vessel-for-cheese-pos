@@ -12,8 +12,8 @@ import com.jackingaming.vesselforcheesepos.models.menu_items.sides.SteamedVegeta
 import java.util.Arrays;
 import java.util.List;
 
-public class SidesInputPaneFragment extends InputPaneFragment {
-    public static final String TAG = SidesInputPaneFragment.class.getSimpleName();
+public class SidesFragment extends InputPaneFragment {
+    public static final String TAG = SidesFragment.class.getSimpleName();
     public static final int NUM_OF_ROWS_DEFAULT = 2;
     public static final int NUM_OF_COLUMNS_DEFAULT = 2;
 
@@ -24,9 +24,9 @@ public class SidesInputPaneFragment extends InputPaneFragment {
 //    private List<String> buttonTitleSides = Menu.createListOfButtonTitleSides();
     private List<String> buttonTitleSides = Arrays.asList("Steamed Vegetable", "Steamed Vegetable", "Steamed Vegetable", "Steamed Vegetable");
 
-    public static SidesInputPaneFragment newInstance(int param1, int param2) {
+    public static SidesFragment newInstance(int param1, int param2) {
         Log.i(TAG, "newInstance()");
-        SidesInputPaneFragment fragment = new SidesInputPaneFragment();
+        SidesFragment fragment = new SidesFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_NUM_OF_ROWS, param1);
         args.putInt(ARG_NUM_OF_COLUMNS, param2);
