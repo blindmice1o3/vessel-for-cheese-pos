@@ -18,7 +18,16 @@ public class DrinksTeaFragment extends TabbedInputPaneFragment {
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
     // TODO:
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
-            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+            NUM_OF_COLUMNS_DEFAULT,
+            Menu.hotTeas.get(0).getMenuItems().size() +
+                    Menu.hotTeas.get(1).getMenuItems().size() +
+                    Menu.hotTeas.get(2).getMenuItems().size() +
+                    Menu.hotTeas.get(3).getMenuItems().size() +
+                    Menu.icedTeas.get(1).getMenuItems().size() +
+                    Menu.icedTeas.get(2).getMenuItems().size() +
+                    Menu.icedTeas.get(3).getMenuItems().size() +
+                    Menu.icedTeas.get(4).getMenuItems().size()
+    );
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
@@ -27,13 +36,56 @@ public class DrinksTeaFragment extends TabbedInputPaneFragment {
 
     {
         // TODO:
-        for (Section section : Menu.blendedBeverages) {
-            for (MenuItem menuItem : section.getMenuItems()) {
-                buttonTitleTea.add(
-                        menuItem.getId()
-                );
-            }
+        Section chaiTeas = Menu.hotTeas.get(0);
+        Section blackTeas = Menu.hotTeas.get(1);
+        Section greenTeas = Menu.hotTeas.get(2);
+        Section herbalTeas = Menu.hotTeas.get(3);
+        Section icedBlackTeas = Menu.icedTeas.get(1);
+        Section icedChaiTeas = Menu.icedTeas.get(2);
+        Section icedGreenTeas = Menu.icedTeas.get(3);
+        Section icedHerbalTeas = Menu.icedTeas.get(4);
+
+        for (MenuItem menuItem : chaiTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
         }
+        for (MenuItem menuItem : blackTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : greenTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : herbalTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedBlackTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedChaiTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedGreenTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedHerbalTeas.getMenuItems()) {
+            buttonTitleTea.add(
+                    menuItem.getId()
+            );
+        }
+
         if (buttonTitleTea.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
             int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleTea.size();
             for (int i = 0; i < numberOfEmptyButton; i++) {
@@ -90,18 +142,80 @@ public class DrinksTeaFragment extends TabbedInputPaneFragment {
                 Log.i(TAG, tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
-                    MenuItem menuItemSelected = null;
                     // TODO:
-                    for (Section section : Menu.blendedBeverages) {
-                        for (MenuItem menuItem : section.getMenuItems()) {
-                            if (tagOfSelectedButton.equals(menuItem.getId())) {
-                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
-                            } else {
-                                Log.e(TAG, "could NOT find the selected menu item");
-                            }
+                    Section chaiTeas = Menu.hotTeas.get(0);
+                    Section blackTeas = Menu.hotTeas.get(1);
+                    Section greenTeas = Menu.hotTeas.get(2);
+                    Section herbalTeas = Menu.hotTeas.get(3);
+                    Section icedBlackTeas = Menu.icedTeas.get(1);
+                    Section icedChaiTeas = Menu.icedTeas.get(2);
+                    Section icedGreenTeas = Menu.icedTeas.get(3);
+                    Section icedHerbalTeas = Menu.icedTeas.get(4);
+
+                    for (MenuItem menuItem : chaiTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
                         }
                     }
-                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                    for (MenuItem menuItem : blackTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : greenTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : herbalTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedBlackTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedChaiTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedGreenTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedHerbalTeas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }

@@ -17,7 +17,10 @@ public class DrinksHomeFragment extends TabbedInputPaneFragment {
     public static final String TAG = DrinksHomeFragment.class.getSimpleName();
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
-            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+            NUM_OF_COLUMNS_DEFAULT,
+            Menu.blendedBeverages.get(0).getMenuItems().size() +
+                    Menu.blendedBeverages.get(1).getMenuItems().size()
+    );
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
@@ -88,17 +91,17 @@ public class DrinksHomeFragment extends TabbedInputPaneFragment {
                 Log.i(TAG, tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
-                    MenuItem menuItemSelected = null;
+                    // TODO:
                     for (Section section : Menu.blendedBeverages) {
                         for (MenuItem menuItem : section.getMenuItems()) {
                             if (tagOfSelectedButton.equals(menuItem.getId())) {
-                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
-                            } else {
-                                Log.e(TAG, "could NOT find the selected menu item");
+                                inputPaneFragmentListener.onMenuItemClicked(
+                                        createCopyOfMenuItemFromMenu(menuItem)
+                                );
+                                return;
                             }
                         }
                     }
-                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }

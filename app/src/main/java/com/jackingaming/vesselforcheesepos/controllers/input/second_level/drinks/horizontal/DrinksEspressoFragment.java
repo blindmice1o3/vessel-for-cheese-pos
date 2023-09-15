@@ -18,7 +18,21 @@ public class DrinksEspressoFragment extends TabbedInputPaneFragment {
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
     // TODO:
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
-            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+            NUM_OF_COLUMNS_DEFAULT,
+            Menu.coldCoffees.get(2).getMenuItems().size() +
+                    Menu.coldCoffees.get(4).getMenuItems().size() +
+                    Menu.coldCoffees.get(5).getMenuItems().size() +
+                    Menu.coldCoffees.get(6).getMenuItems().size() +
+                    Menu.coldCoffees.get(7).getMenuItems().size() +
+                    Menu.coldCoffees.get(8).getMenuItems().size() +
+                    Menu.hotCoffees.get(0).getMenuItems().size() +
+                    Menu.hotCoffees.get(2).getMenuItems().size() +
+                    Menu.hotCoffees.get(3).getMenuItems().size() +
+                    Menu.hotCoffees.get(4).getMenuItems().size() +
+                    Menu.hotCoffees.get(5).getMenuItems().size() +
+                    Menu.hotCoffees.get(6).getMenuItems().size() +
+                    Menu.hotCoffees.get(7).getMenuItems().size()
+    );
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
@@ -27,13 +41,86 @@ public class DrinksEspressoFragment extends TabbedInputPaneFragment {
 
     {
         // TODO:
-        for (Section section : Menu.blendedBeverages) {
-            for (MenuItem menuItem : section.getMenuItems()) {
-                buttonTitleEspresso.add(
-                        menuItem.getId()
-                );
-            }
+        Section icedAmericano = Menu.coldCoffees.get(2);
+        Section icedShakenEspresso = Menu.coldCoffees.get(4);
+        Section icedFlatWhites = Menu.coldCoffees.get(5);
+        Section icedLattes = Menu.coldCoffees.get(6);
+        Section icedMacchiatos = Menu.coldCoffees.get(7);
+        Section icedMocha = Menu.coldCoffees.get(8);
+        Section americanos = Menu.hotCoffees.get(0);
+        Section cappuccinos = Menu.hotCoffees.get(2);
+        Section espressoShots = Menu.hotCoffees.get(3);
+        Section flatWhites = Menu.hotCoffees.get(4);
+        Section lattes = Menu.hotCoffees.get(5);
+        Section macchiatos = Menu.hotCoffees.get(6);
+        Section mochas = Menu.hotCoffees.get(7);
+
+        for (MenuItem menuItem : icedAmericano.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
         }
+        for (MenuItem menuItem : icedShakenEspresso.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedFlatWhites.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedLattes.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedMacchiatos.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedMocha.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : americanos.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : cappuccinos.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : espressoShots.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : flatWhites.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : lattes.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : macchiatos.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : mochas.getMenuItems()) {
+            buttonTitleEspresso.add(
+                    menuItem.getId()
+            );
+        }
+
         if (buttonTitleEspresso.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
             int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleEspresso.size();
             for (int i = 0; i < numberOfEmptyButton; i++) {
@@ -90,18 +177,125 @@ public class DrinksEspressoFragment extends TabbedInputPaneFragment {
                 Log.i(TAG, tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
-                    MenuItem menuItemSelected = null;
                     // TODO:
-                    for (Section section : Menu.blendedBeverages) {
-                        for (MenuItem menuItem : section.getMenuItems()) {
-                            if (tagOfSelectedButton.equals(menuItem.getId())) {
-                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
-                            } else {
-                                Log.e(TAG, "could NOT find the selected menu item");
-                            }
+                    Section icedAmericano = Menu.coldCoffees.get(2);
+                    Section icedShakenEspresso = Menu.coldCoffees.get(4);
+                    Section icedFlatWhites = Menu.coldCoffees.get(5);
+                    Section icedLattes = Menu.coldCoffees.get(6);
+                    Section icedMacchiatos = Menu.coldCoffees.get(7);
+                    Section icedMocha = Menu.coldCoffees.get(8);
+                    Section americanos = Menu.hotCoffees.get(0);
+                    Section cappuccinos = Menu.hotCoffees.get(2);
+                    Section espressoShots = Menu.hotCoffees.get(3);
+                    Section flatWhites = Menu.hotCoffees.get(4);
+                    Section lattes = Menu.hotCoffees.get(5);
+                    Section macchiatos = Menu.hotCoffees.get(6);
+                    Section mochas = Menu.hotCoffees.get(7);
+
+                    for (MenuItem menuItem : icedAmericano.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
                         }
                     }
-                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                    for (MenuItem menuItem : icedShakenEspresso.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedFlatWhites.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedLattes.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedMacchiatos.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedMocha.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : americanos.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : cappuccinos.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : espressoShots.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : flatWhites.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : lattes.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : macchiatos.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : mochas.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }

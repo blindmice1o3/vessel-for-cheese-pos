@@ -18,7 +18,12 @@ public class DrinksBrewedFragment extends TabbedInputPaneFragment {
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
     // TODO:
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
-            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+            NUM_OF_COLUMNS_DEFAULT,
+            Menu.coldCoffees.get(0).getMenuItems().size() +
+                    Menu.coldCoffees.get(1).getMenuItems().size() +
+                    Menu.coldCoffees.get(3).getMenuItems().size() +
+                    Menu.hotCoffees.get(1).getMenuItems().size()
+    );
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
@@ -27,13 +32,32 @@ public class DrinksBrewedFragment extends TabbedInputPaneFragment {
 
     {
         // TODO:
-        for (Section section : Menu.blendedBeverages) {
-            for (MenuItem menuItem : section.getMenuItems()) {
-                buttonTitleBrewed.add(
-                        menuItem.getId()
-                );
-            }
+        Section coldBrews = Menu.coldCoffees.get(0);
+        Section nitroColdBrews = Menu.coldCoffees.get(1);
+        Section icedCoffees = Menu.coldCoffees.get(3);
+        Section brewedCoffees = Menu.hotCoffees.get(1);
+
+        for (MenuItem menuItem : coldBrews.getMenuItems()) {
+            buttonTitleBrewed.add(
+                    menuItem.getId()
+            );
         }
+        for (MenuItem menuItem : nitroColdBrews.getMenuItems()) {
+            buttonTitleBrewed.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedCoffees.getMenuItems()) {
+            buttonTitleBrewed.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : brewedCoffees.getMenuItems()) {
+            buttonTitleBrewed.add(
+                    menuItem.getId()
+            );
+        }
+
         if (buttonTitleBrewed.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
             int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleBrewed.size();
             for (int i = 0; i < numberOfEmptyButton; i++) {
@@ -90,18 +114,44 @@ public class DrinksBrewedFragment extends TabbedInputPaneFragment {
                 Log.i(TAG, tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
-                    MenuItem menuItemSelected = null;
                     // TODO:
-                    for (Section section : Menu.blendedBeverages) {
-                        for (MenuItem menuItem : section.getMenuItems()) {
-                            if (tagOfSelectedButton.equals(menuItem.getId())) {
-                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
-                            } else {
-                                Log.e(TAG, "could NOT find the selected menu item");
-                            }
+                    Section coldBrews = Menu.coldCoffees.get(0);
+                    Section nitroColdBrews = Menu.coldCoffees.get(1);
+                    Section icedCoffees = Menu.coldCoffees.get(3);
+                    Section brewedCoffees = Menu.hotCoffees.get(1);
+
+                    for (MenuItem menuItem : coldBrews.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
                         }
                     }
-                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                    for (MenuItem menuItem : nitroColdBrews.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedCoffees.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : brewedCoffees.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }

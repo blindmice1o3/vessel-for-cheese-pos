@@ -5,7 +5,7 @@ import com.jackingaming.vesselforcheesepos.R;
 public class IcedCoffee extends IcedCoffees {
     public static final String TAG = IcedCoffee.class.getSimpleName();
 
-    public static final String ID = "";
+    public static final String ID = "IcedCoffee";
     public static final int DEFAULT_IMAGE_RESOURCE_ID = R.drawable.harvest_moon_natsume;
     public static final String DEFAULT_NAME = "Iced Coffee";
     public static final String DEFAULT_DESCRIPTION = "Freshly brewed Starbucks Iced Coffee Blend served chilled and sweetened over ice. An absolutely, seriously, refreshingly lift to any day.";

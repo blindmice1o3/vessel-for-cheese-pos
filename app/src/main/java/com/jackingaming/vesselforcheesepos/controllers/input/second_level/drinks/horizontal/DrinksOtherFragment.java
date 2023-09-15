@@ -18,7 +18,15 @@ public class DrinksOtherFragment extends TabbedInputPaneFragment {
     public static final int NUM_OF_COLUMNS_DEFAULT = 5;
     // TODO:
     public static final int NUM_OF_ROWS_DEFAULT = determineNumOfRowsDefault(
-            NUM_OF_COLUMNS_DEFAULT, Menu.blendedBeverages.get(0).getMenuItems().size() + Menu.blendedBeverages.get(1).getMenuItems().size());
+            NUM_OF_COLUMNS_DEFAULT,
+            Menu.hotDrinks.get(0).getMenuItems().size() +
+                    Menu.hotDrinks.get(1).getMenuItems().size() +
+                    Menu.hotDrinks.get(2).getMenuItems().size() +
+                    Menu.coldDrinks.get(0).getMenuItems().size() +
+                    Menu.coldDrinks.get(1).getMenuItems().size() +
+                    Menu.coldDrinks.get(2).getMenuItems().size() +
+                    Menu.coldDrinks.get(4).getMenuItems().size()
+    );
 
     private static final String ARG_NUM_OF_ROWS = "num of rows";
     private static final String ARG_NUM_OF_COLUMNS = "num of columns";
@@ -27,13 +35,50 @@ public class DrinksOtherFragment extends TabbedInputPaneFragment {
 
     {
         // TODO:
-        for (Section section : Menu.blendedBeverages) {
-            for (MenuItem menuItem : section.getMenuItems()) {
-                buttonTitleOther.add(
-                        menuItem.getId()
-                );
-            }
+        Section hotChocolates = Menu.hotDrinks.get(0);
+        Section juice = Menu.hotDrinks.get(1);
+        Section steamers = Menu.hotDrinks.get(2);
+        Section refreshers = Menu.coldDrinks.get(0);
+        Section icedJuice = Menu.coldDrinks.get(1);
+        Section milk = Menu.coldDrinks.get(2);
+        Section water = Menu.coldDrinks.get(4);
+
+        for (MenuItem menuItem : hotChocolates.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
         }
+        for (MenuItem menuItem : juice.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : steamers.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : refreshers.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : icedJuice.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : milk.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+        for (MenuItem menuItem : water.getMenuItems()) {
+            buttonTitleOther.add(
+                    menuItem.getId()
+            );
+        }
+
         if (buttonTitleOther.size() < (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT)) {
             int numberOfEmptyButton = (NUM_OF_COLUMNS_DEFAULT * NUM_OF_ROWS_DEFAULT) - buttonTitleOther.size();
             for (int i = 0; i < numberOfEmptyButton; i++) {
@@ -90,18 +135,71 @@ public class DrinksOtherFragment extends TabbedInputPaneFragment {
                 Log.i(TAG, tagOfSelectedButton);
 
                 if (!tagOfSelectedButton.equals("")) {
-                    MenuItem menuItemSelected = null;
                     // TODO:
-                    for (Section section : Menu.blendedBeverages) {
-                        for (MenuItem menuItem : section.getMenuItems()) {
-                            if (tagOfSelectedButton.equals(menuItem.getId())) {
-                                menuItemSelected = createCopyOfMenuItemFromMenu(menuItem);
-                            } else {
-                                Log.e(TAG, "could NOT find the selected menu item");
-                            }
+                    Section hotChocolates = Menu.hotDrinks.get(0);
+                    Section juice = Menu.hotDrinks.get(1);
+                    Section steamers = Menu.hotDrinks.get(2);
+                    Section refreshers = Menu.coldDrinks.get(0);
+                    Section icedJuice = Menu.coldDrinks.get(1);
+                    Section milk = Menu.coldDrinks.get(2);
+                    Section water = Menu.coldDrinks.get(4);
+
+                    for (MenuItem menuItem : hotChocolates.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
                         }
                     }
-                    inputPaneFragmentListener.onMenuItemClicked(menuItemSelected);
+                    for (MenuItem menuItem : juice.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : steamers.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : refreshers.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : icedJuice.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : milk.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
+                    for (MenuItem menuItem : water.getMenuItems()) {
+                        if (tagOfSelectedButton.equals(menuItem.getId())) {
+                            inputPaneFragmentListener.onMenuItemClicked(
+                                    createCopyOfMenuItemFromMenu(menuItem)
+                            );
+                            return;
+                        }
+                    }
                 } else {
                     Log.e(TAG, "tagOfSelectedButton.equals(\"\")... do nothing");
                 }

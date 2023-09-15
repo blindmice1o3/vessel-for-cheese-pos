@@ -11,7 +11,7 @@ import java.util.List;
 public class IcedCoffeeWithMilk extends IcedCoffees {
     public static final String TAG = IcedCoffeeWithMilk.class.getSimpleName();
 
-    public static final String ID = "";
+    public static final String ID = "IcedCoffeeWithMilk";
     public static final int DEFAULT_IMAGE_RESOURCE_ID = R.drawable.harvest_moon_natsume;
     public static final String DEFAULT_NAME = "Iced Coffee with Milk";
     public static final String DEFAULT_DESCRIPTION = "Freshly brewed Starbucks Iced Coffee Blend with milk served chilled and sweetened over ice. An absolutely, seriously, refreshingly lift to any day.";

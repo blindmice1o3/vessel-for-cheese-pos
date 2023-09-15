@@ -14,7 +14,7 @@ import java.util.List;
 public class CinnamonCaramelCreamNitroColdBrew extends NitroColdBrews {
     public static final String TAG = CinnamonCaramelCreamNitroColdBrew.class.getSimpleName();
 
-    public static final String ID = "";
+    public static final String ID = "CinnamonCaramelCreamNitroColdBrew";
     public static final int DEFAULT_IMAGE_RESOURCE_ID = R.drawable.harvest_moon_natsume;
     public static final String DEFAULT_NAME = "Cinnamon Caramel Cream Nitro Cold Brew";
     public static final String DEFAULT_DESCRIPTION = "Starbucks Nitro packed with flavors of cinnamon caramel, topped with vanilla sweet cream cold foam and dusted with even more flavor for a special personal treat.";

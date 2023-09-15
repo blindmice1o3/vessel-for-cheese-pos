@@ -25,7 +25,7 @@ import java.util.List;
 public class IcedEspresso extends IcedCoffees {
     public static final String TAG = IcedEspresso.class.getSimpleName();
 
-    public static final String ID = "";
+    public static final String ID = "IcedEspresso";
     public static final int DEFAULT_IMAGE_RESOURCE_ID = R.drawable.harvest_moon_natsume;
     public static final String DEFAULT_NAME = "Iced Espresso";
     public static final String DEFAULT_DESCRIPTION = "Our smooth signature Espresso Roast over ice boasts rich, robust flavor and caramelly sweetness. A recipe of perfection at the heart of every handcrafted espresso we serve.";
