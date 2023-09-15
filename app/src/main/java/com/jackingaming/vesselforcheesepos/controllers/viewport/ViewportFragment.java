@@ -63,6 +63,8 @@ public class ViewportFragment extends Fragment {
     private List<MenuItem> menuItems = new ArrayList<MenuItem>();
     private MenuItemAdapter adapter;
 
+    private Button buttonQuantity;
+    private Button buttonFindOrder;
     private Button buttonPost;
 
     public ViewportFragment() {
@@ -115,6 +117,8 @@ public class ViewportFragment extends Fragment {
 
         tvIndexDisplayer = view.findViewById(R.id.tv_index_displayer);
         rvStagingArea = view.findViewById(R.id.rv_staging_area);
+        buttonQuantity = view.findViewById(R.id.button_quantity);
+        buttonFindOrder = view.findViewById(R.id.button_find_order);
         buttonPost = view.findViewById(R.id.button_post);
 
         return view;
@@ -179,6 +183,33 @@ public class ViewportFragment extends Fragment {
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         rvStagingArea.addItemDecoration(itemDecoration);
+
+        buttonQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "buttonQuantity clicked", Toast.LENGTH_SHORT).show();
+
+                // TODO:
+            }
+        });
+
+        buttonFindOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "buttonFindOrder clicked", Toast.LENGTH_SHORT).show();
+
+                // TODO:
+            }
+        });
+
+        buttonPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "buttonPost clicked", Toast.LENGTH_SHORT).show();
+
+                // TODO:
+            }
+        });
     }
 
     @Override

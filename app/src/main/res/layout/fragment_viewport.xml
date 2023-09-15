@@ -27,15 +27,37 @@
         app:layout_constraintTop_toBottomOf="@id/tv_index_displayer" />
 
     <Button
-        android:id="@+id/button_post"
-        android:layout_width="match_parent"
+        android:id="@+id/button_quantity"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Quantity"
+        app:layout_constraintBottom_toTopOf="@id/button_find_order"
+        app:layout_constraintEnd_toStartOf="@id/button_post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_staging_area" />
+
+    <Button
+        android:id="@+id/button_find_order"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="Find Order"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_post"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_quantity" />
+
+    <Button
+        android:id="@+id/button_post"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:backgroundTint="@color/grey"
         android:text="POST"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/button_find_order"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_staging_area" />
+        app:layout_constraintStart_toEndOf="@id/button_quantity"
+        app:layout_constraintTop_toTopOf="@id/button_quantity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
