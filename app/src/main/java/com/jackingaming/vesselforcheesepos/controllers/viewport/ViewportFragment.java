@@ -100,6 +100,17 @@ public class ViewportFragment extends Fragment {
         }
     }
 
+    public void clearMenuItems() {
+        menuItems.clear();
+        adapter.notifyDataSetChanged();
+
+        resetViewSelected();
+    }
+
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +219,7 @@ public class ViewportFragment extends Fragment {
                 Toast.makeText(getContext(), "buttonPost clicked", Toast.LENGTH_SHORT).show();
 
                 // TODO:
+                postButtonListener.onPostButtonClicked();
             }
         });
     }
